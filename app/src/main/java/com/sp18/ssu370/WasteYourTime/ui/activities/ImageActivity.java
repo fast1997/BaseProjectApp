@@ -31,6 +31,8 @@ public class ImageActivity extends AppCompatActivity {
         String title = intent.getExtras().getString("Title");
         String thumbnail = intent.getExtras().getString("Thumbnail");
         String description = intent.getExtras().getString("Description");
+        boolean animated = intent.getExtras().getBoolean("Animated");
+
 
         Picasso.get().load(thumbnail).into(thumbnailView);
         titleView.setText(title);

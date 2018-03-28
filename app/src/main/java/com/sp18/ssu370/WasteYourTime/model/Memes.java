@@ -5,11 +5,18 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 public class Memes {
-    @SerializedName("memes")
-    private ArrayList<ImgurImage> memes;
+    @SerializedName("id")
+    private String id;
+    @SerializedName("images")
+    private ArrayList<ImgurImage> images;
 
 
-    public ArrayList<ImgurImage> getMemes() {
-        return memes;
+
+    public ArrayList<ImgurImage> getImages() {
+        return images;
+    }
+
+    public String getId() {
+        return id;
     }
 }

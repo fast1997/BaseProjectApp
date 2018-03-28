@@ -13,20 +13,36 @@ import android.widget.TextView;
 
 import com.sp18.ssu370.WasteYourTime.model.ImgurImage;
 import com.sp18.ssu370.WasteYourTime.model.ImgurImageList;
+import com.sp18.ssu370.WasteYourTime.model.Memes;
 import com.sp18.ssu370.WasteYourTime.ui.activities.ImageActivity;
 import com.sp18.ssu370.baseprojectapp.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
     private Context mContext;
     private ImgurImageList imgList;
+    private ArrayList<ImgurImage> allImages;
+    private int imgListIdx = 1;
 
     public RecyclerViewAdapter(Context mContext, ImgurImageList imgList) {
         this.mContext = mContext;
         this.imgList = imgList;
+        /*for(int i = 0; i < this.imgList.getData().size(); i++) {
+
+            if( this.imgList.getData().get(i) != null && this.imgList.getData().get(i).getImages() != null  ) {
+
+                for(int j = 0; j < this.imgList.getData().get(i).getImages().size(); j++)
+                {
+                    if(this.imgList.getData().get(i).getImages().get(j) != null) {
+                        this.allImages.add(this.imgList.getData().get(i).getImages().get(j));
+                    }
+                }
+            }
+        }*/
     }
 
     @NonNull
@@ -43,8 +59,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
-        holder.imageTitle.setText(imgList.getImgurImage().getMemes().get(position).getName());
-        Picasso.get().load(imgList.getImgurImage().getMemes().get(position).getUrl()).into(holder.img_thumbnail);
+        holder.imageTitle.setText(imgList.getData().get(imgListIdx).getImages().get(position).getName());
+        //if(imgList.getData().get(imgListIdx).getImages().get(position).isAnimated())
+        Picasso.get().load(imgList.getData().get(imgListIdx).getImages().get(position).getUrl()).into(holder.img_thumbnail);
 
         //Set click listener
         holder.imgurImageView.setOnClickListener(new View.OnClickListener(){
@@ -53,20 +70,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 Intent intent = new Intent(mContext, ImageActivity.class);
                 //pass data to image activity
-                intent.putExtra("Title",imgList.getImgurImage().getMemes().get(position).getName() );
-                intent.putExtra("Thumbnail",imgList.getImgurImage().getMemes().get(position).getUrl() );
-                intent.putExtra("Description","Killer whales are actually dolphins." );
+                intent.putExtra("Title",imgList.getData().get(imgListIdx).getImages().get(position).getName() );
+                intent.putExtra("Thumbnail",imgList.getData().get(imgListIdx).getImages().get(position).getUrl());
+                intent.putExtra("Description",imgList.getData().get(imgListIdx).getImages().get(position).getDescription());
+                intent.putExtra("Animated", imgList.getData().get(imgListIdx).getImages().get(position).isAnimated());
 
                 //start the activity
                 mContext.startActivity(intent);
 
             }
         });
+
+        //imgListIdx++;
     }
 
     @Override
     public int getItemCount() {
-        return imgList.getImgurImage().getMemes().size();
+        return imgList.getData().get(imgListIdx).getImages().size();
     }
 
 

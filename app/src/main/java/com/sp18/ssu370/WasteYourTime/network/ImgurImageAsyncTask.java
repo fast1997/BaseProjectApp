@@ -10,13 +10,17 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public  class ImgurImageAsyncTask  extends AsyncTask<String,String,ImgurImageList> {
 
-    private String baseApiUrl = "https://api.imgflip.com/get_memes";
-    //private String apiKey = "f04b6cbae2ef173f97c38ca71f2bb09d7b3e2150";
-    //private String appId = "0d38af84e4e2e36";
+    //private String baseApiUrl = "https://api.imgflip.com/get_memes"; //For base imgflip
+    private String baseApiUrl = "https://api.imgur.com/3/gallery/search/";
+
+
+
+    private String authorization = "";
 
     protected OnImgurImageFetchResponse listener;
 
@@ -27,13 +31,21 @@ public  class ImgurImageAsyncTask  extends AsyncTask<String,String,ImgurImageLis
     @Override
     protected ImgurImageList doInBackground(String... strings) {
         String searchParams = strings[0];
+
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder urlBuilder = HttpUrl.parse(baseApiUrl).newBuilder();
-        //urlBuilder.addQueryParameter("_app_key", apiKey);
-        //urlBuilder.addQueryParameter("_app_id", appId);
-        urlBuilder.addQueryParameter("_search_term", searchParams);
+
+
+        urlBuilder.addQueryParameter("q", searchParams);
         String url = urlBuilder.build().toString();
-        Request request = new Request.Builder().url(url).build();
+
+        //Request request = new Request.Builder().url(url).build();//base
+        Request request = new Request.Builder()
+                .url(url)
+                .header("Authorization", "Client-ID 9fca26f6c035661")
+                .build();//new attemp for imgur
+
+
         Response response = null;
         try {
             response = client.newCall(request).execute();

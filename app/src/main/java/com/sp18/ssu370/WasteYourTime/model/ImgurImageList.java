@@ -11,18 +11,20 @@ import java.util.ArrayList;
 public class ImgurImageList {
 
 
-    @SerializedName("success")
-    private  boolean success;
-
     @SerializedName("data")
-    private Memes data;
+    private ArrayList<Memes> data;
+
+    public String getId() {
+        return id;
+    }
+
+    @SerializedName("id")
+    private String id;
 
 
-    public Memes getImgurImage() {
+    public ArrayList<Memes> getData() {
         return data;
     }
 
-    public boolean isSuccess() {
-        return success;
-    }
+
 }
