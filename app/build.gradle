@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion "27.0.1"
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.sp18.ssu370.baseprojectapp"
         minSdkVersion 22
@@ -28,5 +28,9 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
+    //load image from url
+    compile 'com.squareup.picasso:picasso:2.71828'
+    //load recyclerview
+    compile 'com.android.support:recyclerview-v7:27.1.0'
     testCompile 'junit:junit:4.12'
 }

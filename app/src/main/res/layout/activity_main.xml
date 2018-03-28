@@ -2,10 +2,16 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
+    android:foreground="?android:attr/selectableItemBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="com.sp18.ssu370.WasteYourTime.ui.activities.MainActivity">
+
+
+
 
     <RelativeLayout
         android:orientation="horizontal"
@@ -14,9 +20,11 @@
         android:id="@+id/relativeLayout">
 
         <EditText
+            android:background="@color/white"
             android:id="@+id/search_edit_text"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -36,7 +44,15 @@
             android:text="Search" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    </android.support.v7.widget.RecyclerView>
+
+   <!-- <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -47,13 +63,18 @@
 
         <ImageView
             android:id="@+id/img_thumbnail"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
+            android:layout_width="317dp"
+            android:layout_height="264dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="179dp" />
 
-        <TextView
-            android:id="@+id/img_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/img_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />-->
 
 </LinearLayout>

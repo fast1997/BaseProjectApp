@@ -14,9 +14,9 @@ import java.io.IOException;
 
 public  class ImgurImageAsyncTask  extends AsyncTask<String,String,ImgurImageList> {
 
-    private String baseApiUrl = "https://api.imgur.com";
-    private String apiKey = "f04b6cbae2ef173f97c38ca71f2bb09d7b3e2150";
-    private String appId = "0d38af84e4e2e36";
+    private String baseApiUrl = "https://api.imgflip.com/get_memes";
+    //private String apiKey = "f04b6cbae2ef173f97c38ca71f2bb09d7b3e2150";
+    //private String appId = "0d38af84e4e2e36";
 
     protected OnImgurImageFetchResponse listener;
 
@@ -29,9 +29,9 @@ public  class ImgurImageAsyncTask  extends AsyncTask<String,String,ImgurImageLis
         String searchParams = strings[0];
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder urlBuilder = HttpUrl.parse(baseApiUrl).newBuilder();
-        urlBuilder.addQueryParameter("_app_key", apiKey);
-        urlBuilder.addQueryParameter("_app_id", appId);
-        urlBuilder.addQueryParameter("your_search_parameters", searchParams);
+        //urlBuilder.addQueryParameter("_app_key", apiKey);
+        //urlBuilder.addQueryParameter("_app_id", appId);
+        urlBuilder.addQueryParameter("_search_term", searchParams);
         String url = urlBuilder.build().toString();
         Request request = new Request.Builder().url(url).build();
         Response response = null;

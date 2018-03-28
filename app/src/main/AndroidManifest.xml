@@ -17,6 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.sp18.ssu370.WasteYourTime.ui.activities.ImageActivity">
+
+        </activity>
     </application>
 
 </manifest>

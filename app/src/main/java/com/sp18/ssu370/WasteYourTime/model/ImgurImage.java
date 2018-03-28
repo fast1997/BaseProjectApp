@@ -9,38 +9,21 @@ import com.google.gson.annotations.SerializedName;
 public class ImgurImage {
     @SerializedName("id")
     private String id;
-    @SerializedName("title")
-    private String title;
-    @SerializedName("description")
-    private String description;
-    @SerializedName("animated")
-    private String animated;
-    @SerializedName("link")
-    private String link;
     @SerializedName("name")
     private String name;
+    @SerializedName("url")
+    private String url;
+
 
     public String getId() {
         return id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getAnimated() {
-        return animated;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
     public String getName() {
         return name;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }
