@@ -15,6 +15,7 @@ import com.sp18.ssu370.WasteYourTime.model.ImgurImage;
 import com.sp18.ssu370.WasteYourTime.model.ImgurImageList;
 import com.sp18.ssu370.WasteYourTime.model.Memes;
 import com.sp18.ssu370.WasteYourTime.ui.activities.ImageActivity;
+import com.sp18.ssu370.WasteYourTime.ui.util.AllImagesAsyncTask;
 import com.sp18.ssu370.baseprojectapp.R;
 import com.squareup.picasso.Picasso;
 
@@ -27,22 +28,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ImgurImageList imgList;
     private ArrayList<ImgurImage> allImages;
     private int imgListIdx = 1;
+    private AllImagesAsyncTask task;
 
     public RecyclerViewAdapter(Context mContext, ImgurImageList imgList) {
         this.mContext = mContext;
         this.imgList = imgList;
-        /*for(int i = 0; i < this.imgList.getData().size(); i++) {
 
-            if( this.imgList.getData().get(i) != null && this.imgList.getData().get(i).getImages() != null  ) {
-
-                for(int j = 0; j < this.imgList.getData().get(i).getImages().size(); j++)
-                {
-                    if(this.imgList.getData().get(i).getImages().get(j) != null) {
-                        this.allImages.add(this.imgList.getData().get(i).getImages().get(j));
-                    }
-                }
+        task = new AllImagesAsyncTask();
+        task.setListener(new AllImagesAsyncTask.OnAllImageFetchResponse() {
+            @Override
+            public void onCallback(ArrayList<ImgurImage> imgurImages) {
+                allImages = imgurImages;
             }
-        }*/
+        });
     }
 
     @NonNull
@@ -61,7 +59,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.imageTitle.setText(imgList.getData().get(imgListIdx).getImages().get(position).getName());
         //if(imgList.getData().get(imgListIdx).getImages().get(position).isAnimated())
-        Picasso.get().load(imgList.getData().get(imgListIdx).getImages().get(position).getUrl()).into(holder.img_thumbnail);
+        Picasso.get().load(imgList.getData().get(imgListIdx).getImages().get(position).getUrl())
+                .fit()
+                .into(holder.img_thumbnail);
 
         //Set click listener
         holder.imgurImageView.setOnClickListener(new View.OnClickListener(){
