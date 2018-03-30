@@ -7,20 +7,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.sp18.ssu370.WasteYourTime.model.Album;
-import com.sp18.ssu370.WasteYourTime.model.ImgurImage;
-import com.sp18.ssu370.WasteYourTime.model.ImgurImageList;
-import com.sp18.ssu370.WasteYourTime.model.Memes;
 import com.sp18.ssu370.WasteYourTime.network.AlbumAsyncTask;
-import com.sp18.ssu370.WasteYourTime.network.ImgurImageAsyncTask;
 import com.sp18.ssu370.WasteYourTime.ui.view.ImageRecyclerViewAdapter;
 import com.sp18.ssu370.baseprojectapp.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -28,8 +20,6 @@ import static android.widget.LinearLayout.VERTICAL;
 
 public class ImageActivity extends AppCompatActivity {
 
-
-    private ArrayList<ImgurImage> allPics;
     private Context thisContext = this;
 
     private TextView title;

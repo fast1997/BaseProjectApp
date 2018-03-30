@@ -78,6 +78,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
+        if(imgList == null)
+            return 0;
         return imgList.getData().size();
     }
 

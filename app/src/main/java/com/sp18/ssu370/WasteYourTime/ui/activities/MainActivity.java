@@ -19,8 +19,6 @@ import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView imgLink;
-    private ImageView imgThumbnail;
     private EditText searchEditText;
     private Button searchButton;
     private ImgurImageAsyncTask task;
@@ -29,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Context thisContext = this;
 
-    private ImgurImageList imgurImageList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
