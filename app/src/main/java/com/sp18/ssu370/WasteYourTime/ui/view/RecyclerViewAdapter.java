@@ -2,45 +2,32 @@ package com.sp18.ssu370.WasteYourTime.ui.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.sp18.ssu370.WasteYourTime.model.ImgurImage;
 import com.sp18.ssu370.WasteYourTime.model.ImgurImageList;
-import com.sp18.ssu370.WasteYourTime.model.Memes;
 import com.sp18.ssu370.WasteYourTime.ui.activities.ImageActivity;
-import com.sp18.ssu370.WasteYourTime.ui.util.AllImagesAsyncTask;
 import com.sp18.ssu370.baseprojectapp.R;
-import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
     private Context mContext;
     private ImgurImageList imgList;
-    private ArrayList<ImgurImage> allImages;
-    private int imgListIdx = 1;
-    private AllImagesAsyncTask task;
 
     public RecyclerViewAdapter(Context mContext, ImgurImageList imgList) {
         this.mContext = mContext;
         this.imgList = imgList;
-
-        task = new AllImagesAsyncTask();
-        task.setListener(new AllImagesAsyncTask.OnAllImageFetchResponse() {
-            @Override
-            public void onCallback(ArrayList<ImgurImage> imgurImages) {
-                allImages = imgurImages;
-            }
-        });
     }
 
     @NonNull
@@ -56,37 +43,42 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+        if( imgList.getData().get(position) != null ) {
+            if( imgList.getData().get(position).getImages() != null) {
+                final ImgurImage img = imgList.getData().get(position).getImages().get(0);
 
-        holder.imageTitle.setText(imgList.getData().get(imgListIdx).getImages().get(position).getName());
-        //if(imgList.getData().get(imgListIdx).getImages().get(position).isAnimated())
-        Picasso.get().load(imgList.getData().get(imgListIdx).getImages().get(position).getUrl())
-                .fit()
-                .into(holder.img_thumbnail);
 
-        //Set click listener
-        holder.imgurImageView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
+                holder.imageTitle.setText(imgList.getData().get(position).getTitle());
 
-                Intent intent = new Intent(mContext, ImageActivity.class);
-                //pass data to image activity
-                intent.putExtra("Title",imgList.getData().get(imgListIdx).getImages().get(position).getName() );
-                intent.putExtra("Thumbnail",imgList.getData().get(imgListIdx).getImages().get(position).getUrl());
-                intent.putExtra("Description",imgList.getData().get(imgListIdx).getImages().get(position).getDescription());
-                intent.putExtra("Animated", imgList.getData().get(imgListIdx).getImages().get(position).isAnimated());
+                Glide.with(mContext)
+                        .load(img.getUrl())
+                        .into(holder.img_thumbnail);
 
-                //start the activity
-                mContext.startActivity(intent);
+                //Set click listener
+                holder.imgurImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
+                        Bundle args = new Bundle();
+                        args.putSerializable("ImageArrayList", imgList.getData().get(position).getImages());
+                        Intent intent = new Intent(mContext, ImageActivity.class);
+                        //pass data to image activity
+                        intent.putExtra("GalleryTitle", imgList.getData().get(position).getTitle());
+                        intent.putExtra("AllImg", args);
+                        intent.putExtra("GalleryID",imgList.getData().get(position).getId());
+                        //start the activity
+                        mContext.startActivity(intent);
+
+                    }
+                });
             }
-        });
-
+        }
         //imgListIdx++;
     }
 
     @Override
     public int getItemCount() {
-        return imgList.getData().get(imgListIdx).getImages().size();
+        return imgList.getData().size();
     }
 
 

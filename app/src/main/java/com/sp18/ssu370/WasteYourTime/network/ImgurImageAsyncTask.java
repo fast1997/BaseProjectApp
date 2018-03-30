@@ -17,10 +17,8 @@ public  class ImgurImageAsyncTask  extends AsyncTask<String,String,ImgurImageLis
 
     //private String baseApiUrl = "https://api.imgflip.com/get_memes"; //For base imgflip
     private String baseApiUrl = "https://api.imgur.com/3/gallery/search/";
+    private String homeApiUrl = "https://api.imgur.com/3/gallery/hot/top/all/2?showViral=true&mature=true&album_previews=true";
 
-
-
-    private String authorization = "";
 
     protected OnImgurImageFetchResponse listener;
 
@@ -30,13 +28,23 @@ public  class ImgurImageAsyncTask  extends AsyncTask<String,String,ImgurImageLis
 
     @Override
     protected ImgurImageList doInBackground(String... strings) {
-        String searchParams = strings[0];
-
+        boolean searching = false;
+        String searchParams = "";
+        String urlToBuild;
+        if(strings[0].equals("home") ) {
+            urlToBuild = homeApiUrl;
+            searching = true;
+        }
+        else {
+            urlToBuild = baseApiUrl;
+            searchParams = strings[0];
+        }
         OkHttpClient client = new OkHttpClient();
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(baseApiUrl).newBuilder();
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(urlToBuild).newBuilder();
 
-
-        urlBuilder.addQueryParameter("q", searchParams);
+        if(searching) {
+            urlBuilder.addQueryParameter("q", searchParams);
+        }
         String url = urlBuilder.build().toString();
 
         //Request request = new Request.Builder().url(url).build();//base

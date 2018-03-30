@@ -36,13 +36,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //imgLink = findViewById(R.id.img_link);
-        //imgThumbnail = findViewById(R.id.img_thumbnail);
         searchEditText = findViewById(R.id.search_edit_text);
         searchButton = findViewById(R.id.my_search_button);
         gallery = findViewById(R.id.recycler_view_id);
 
+        getHomeGalleries();
+        searchClicked();
+    }
 
+    public void getHomeGalleries(){
+        task = new ImgurImageAsyncTask();
+        task.setListener(new ImgurImageAsyncTask.OnImgurImageFetchResponse() {
+            @Override
+            public void onCallback(ImgurImageList imgurImageList) {
+
+                myAdapter = new RecyclerViewAdapter(thisContext,imgurImageList);
+
+                gallery.setLayoutManager(new GridLayoutManager(thisContext, 2));
+                gallery.setAdapter(myAdapter);
+            }
+
+        });
+
+        String home = "home";
+        task.execute(home);
+    }
+
+    public void searchClicked(){
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,13 +76,10 @@ public class MainActivity extends AppCompatActivity {
                         gallery.setLayoutManager(new GridLayoutManager(thisContext, 2));
                         gallery.setAdapter(myAdapter);
 
-                        //imgLink.setText(imgurImageList.getImgurImage().getMemes().get(0).getUrl());
-                        //loadImageFromUrl(imgurImageList.getImgurImage().getMemes().get(0).getUrl());
 
                     }
 
                 });
-
 
                 String searchTerms = searchEditText.getText().toString();
                 task.execute(searchTerms);
@@ -70,8 +87,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void loadImageFromUrl( String url){
-        Picasso.get().load(url).into(imgThumbnail);
-
-    }
 }
