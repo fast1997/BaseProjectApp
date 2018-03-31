@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/viral_id" android:title="Popular">
+
+    </item>
+    <item android:id="@+id/newest_id" android:title="Newest">
+
+    </item>
+    <item android:id="@+id/oldest_id" android:title="Oldest">
+
+    </item>
+    <item android:id="@+id/gif_only_id" android:title="Gif Only">
+
+    </item>
+    <item android:id="@+id/img_only_id" android:title="Image Only">
+
+    </item>
+
+</menu>

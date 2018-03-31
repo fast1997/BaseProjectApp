@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray">
+    android:background="@color/black">
 
     <TextView
         android:id="@+id/image_view_galley_id"
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:text="Title Here"
+        android:textColor="@color/white"
         android:textStyle="bold"
         />
 
