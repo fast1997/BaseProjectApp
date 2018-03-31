@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.sp18.ssu370.WasteYourTime.model.ImgurImage;
 import com.sp18.ssu370.WasteYourTime.model.ImgurImageList;
 import com.sp18.ssu370.WasteYourTime.ui.activities.ImageActivity;
@@ -50,9 +51,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 holder.imageTitle.setText(imgList.getData().get(position).getTitle());
 
-                Glide.with(mContext)
-                        .load(img.getUrl())
-                        .into(holder.img_thumbnail);
+                if(img.isAnimated()){
+                    GlideDrawableImageViewTarget gifLoad = new GlideDrawableImageViewTarget(holder.img_thumbnail);
+
+                    Glide.with(mContext)
+                            .load(img.getUrl())
+                            .fitCenter()
+                            .into(gifLoad);
+                }
+                else{
+                    Glide.with(mContext)
+                            .load(img.getUrl())
+                            .into(holder.img_thumbnail);
+                }
+
 
                 //Set click listener
                 holder.imgurImageView.setOnClickListener(new View.OnClickListener() {

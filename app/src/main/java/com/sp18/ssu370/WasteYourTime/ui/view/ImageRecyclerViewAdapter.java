@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.sp18.ssu370.WasteYourTime.model.ImgurImage;
 import com.sp18.ssu370.WasteYourTime.model.ImgurImageList;
 import com.sp18.ssu370.baseprojectapp.R;
@@ -40,10 +41,24 @@ public class ImageRecyclerViewAdapter extends RecyclerView.Adapter<ImageRecycler
     public void onBindViewHolder(@NonNull ImageRecyclerViewAdapter.MyBigImgViewHolder holder, int position) {
         holder.bigImageTitle.setText(imgList.get(position).getName());
         holder.bigImageDescription.setText(imgList.get(position).getDescription());
-        Glide.with(mContext)
-                .load(imgList.get(position).getUrl())
-                .fitCenter()
-                .into(holder.bigImgThumbnail);
+
+        //holder.bigImgThumbnail.getLayoutParams().height = imgList.get(position).getHeight();
+        //holder.bigImgThumbnail.getLayoutParams().width = imgList.get(position).getWidth();
+        if(imgList.get(position).isAnimated()){
+            GlideDrawableImageViewTarget gifLoad = new GlideDrawableImageViewTarget(holder.bigImgThumbnail);
+
+            Glide.with(mContext)
+                    .load(imgList.get(position).getUrl())
+                    .fitCenter()
+                    .into(gifLoad);
+        }
+        else{
+            Glide.with(mContext)
+                    .load(imgList.get(position).getUrl())
+                    .fitCenter()
+                    .into(holder.bigImgThumbnail);
+        }
+
     }
 
     @Override

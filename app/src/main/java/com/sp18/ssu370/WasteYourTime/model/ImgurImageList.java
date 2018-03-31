@@ -52,4 +52,7 @@ public class ImgurImageList implements Parcelable{
         return data;
     }
 
+    public void setData(ArrayList<Memes> data) {
+        this.data = data;
+    }
 }
