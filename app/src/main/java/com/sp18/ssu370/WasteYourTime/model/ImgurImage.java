@@ -2,6 +2,7 @@ package com.sp18.ssu370.WasteYourTime.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -25,6 +26,7 @@ public class ImgurImage implements Parcelable{
     private int height;
     @SerializedName("link")
     private String url;
+
 
     private ImgurImage(Parcel in) {
         id = in.readString();
@@ -93,6 +95,7 @@ public class ImgurImage implements Parcelable{
     public int getHeight() {
         return height;
     }
+
 
 
 }

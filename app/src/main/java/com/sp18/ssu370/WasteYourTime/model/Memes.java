@@ -2,21 +2,49 @@ package com.sp18.ssu370.WasteYourTime.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class Memes implements Parcelable{
+public class Memes implements Parcelable, Comparable<Memes>{
+
+    private boolean newest, oldest, viral = false;
+
+    public void setNewest(boolean newest) {
+        this.newest = newest;
+    }
+
+    public void setOldest(boolean oldest) {
+        this.oldest = oldest;
+    }
+
+    public void setViral(boolean viral) {
+        this.viral = viral;
+    }
+
     @SerializedName("id")
     private String id;
     @SerializedName("title")
     private String title;
     @SerializedName("images")
     private ArrayList<ImgurImage> images;
-
     @SerializedName("link")
     private String link;
+    @SerializedName("ups")
+    private int ups;
+    @SerializedName("datetime")
+    private int datetime;
+
+    public int getUps() {
+        return ups;
+    }
+
+
+    public int getDatetime() {
+        return datetime;
+    }
 
     @Override
     public int describeContents() {
@@ -65,4 +93,17 @@ public class Memes implements Parcelable{
         return link;
     }
 
+    @Override
+    public int compareTo(@NonNull Memes memes) {
+            if(viral){
+                return memes.ups - ups;
+            }
+            else if(newest){
+                return datetime - memes.datetime;
+            }
+            else if(oldest){
+                return memes.datetime - datetime;
+            }
+            return 0;
+    }
 }

@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.sp18.ssu370.WasteYourTime.model.Album;
+import com.sp18.ssu370.WasteYourTime.model.ImgurImage;
 import com.sp18.ssu370.WasteYourTime.network.AlbumAsyncTask;
 import com.sp18.ssu370.WasteYourTime.ui.view.ImageRecyclerViewAdapter;
 import com.sp18.ssu370.baseprojectapp.R;
@@ -25,6 +26,8 @@ public class ImageActivity extends AppCompatActivity {
     private TextView title;
     private RecyclerView picRecyclerView;
     private ImageRecyclerViewAdapter myAdapter;
+
+    private ArrayList<ImgurImage> currentAlbumPics;
 
     private AlbumAsyncTask task;
 
@@ -50,15 +53,20 @@ public class ImageActivity extends AppCompatActivity {
         task.setListener(new AlbumAsyncTask.OnAlbumFetchResponse() {
             @Override
             public void onCallback(Album album) {
-                myAdapter = new ImageRecyclerViewAdapter(thisContext, album.getSingleData().getImages());
 
-                LinearLayoutManager layoutManager = new LinearLayoutManager(thisContext, VERTICAL, false);
-                picRecyclerView.setLayoutManager(layoutManager);
-                picRecyclerView.setAdapter(myAdapter);
+                currentAlbumPics = album.getSingleData().getImages();
+                setUpRecyclerView();
             }
         });
 
         String type = "getGalleryAlbum";
         task.execute(type,galID);
+    }
+
+    public void setUpRecyclerView(){
+        myAdapter = new ImageRecyclerViewAdapter(thisContext, currentAlbumPics);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(thisContext, VERTICAL, false);
+        picRecyclerView.setLayoutManager(layoutManager);
+        picRecyclerView.setAdapter(myAdapter);
     }
 }

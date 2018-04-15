@@ -20,8 +20,8 @@ import java.util.Random;
 public  class ImgurImageAsyncTask  extends AsyncTask<String,String,ImgurImageList> {
 
     //private String baseApiUrl = "https://api.imgflip.com/get_memes"; //For base imgflip
-    private String baseApiUrl = "https://api.imgur.com/3/gallery/search/";
-    private String homeApiUrl = "https://api.imgur.com/3/gallery/user/time/";
+    private String searchApiUrl = "https://api.imgur.com/3/gallery/search/";
+    private String homeApiUrl = "https://api.imgur.com/3/gallery/";
 
 
     protected OnImgurImageFetchResponse listener;
@@ -32,22 +32,33 @@ public  class ImgurImageAsyncTask  extends AsyncTask<String,String,ImgurImageLis
 
     @Override
     protected ImgurImageList doInBackground(String... strings) {
-        Random random = new Random();
-        int randPage = random.nextInt(10) + 5;
-        homeApiUrl += randPage + "day/2?showViral=true&mature=true&album_previews=true";
+        //Random random = new Random();
+        //int randPage = random.nextInt(10) + 5;
+        //homeApiUrl += randPage + "day/2?showViral=true&mature=true&album_previews=true";
 
         boolean searching = false;
         String searchParams = "";
-        String urlToBuild = "";
+        String section = strings[1];
+        String sort = strings[2];
+        String page = strings[3];
+        String window = strings[4];
+
+        String urlToBuild;
 
         if(strings[0].equals("home") ) {
             urlToBuild = homeApiUrl;
+            urlToBuild += section;
+            urlToBuild += sort;
+            urlToBuild += page;
+            urlToBuild += window;
+            urlToBuild += "?showViral=true&mature=true&album_previews=true";
 
         }
         else {
-            urlToBuild = baseApiUrl;
-            searchParams = strings[0];
+            urlToBuild = searchApiUrl;
+            searchParams = strings[5];
             searching = true;
+            urlToBuild += sort + window + page;
         }
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder urlBuilder = HttpUrl.parse(urlToBuild).newBuilder();

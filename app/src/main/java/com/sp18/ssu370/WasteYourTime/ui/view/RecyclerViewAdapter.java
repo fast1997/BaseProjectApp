@@ -26,9 +26,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context mContext;
     private ImgurImageList imgList;
 
+    public int getCurrentPosition() {
+        return currentPosition;
+    }
+
+    private int currentPosition;
+
     public RecyclerViewAdapter(Context mContext, ImgurImageList imgList) {
         this.mContext = mContext;
         this.imgList = imgList;
+        currentPosition = 0;
     }
 
     @NonNull
@@ -44,6 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+        currentPosition = position;
         if( imgList.getData().get(position) != null ) {
             if( imgList.getData().get(position).getImages() != null) {
                 final ImgurImage img = imgList.getData().get(position).getImages().get(0);
