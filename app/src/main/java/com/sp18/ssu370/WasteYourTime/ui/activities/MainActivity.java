@@ -91,11 +91,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 switch (item.getItemId()){
                     case R.id.home_nav:
                         Toast.makeText(thisContext,"Home",Toast.LENGTH_SHORT).show();
+                        pageNum = 0;
                         type = "home";
+                        page = "";
+                        page += pageNum + "/";
                         getHomeGalleries(type,section,sort,page,window);
                         break;
                     case R.id.favorite_nav:
                         Toast.makeText(thisContext,"Favorite",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.next_nav:
+                        //Toast.makeText(thisContext,"Next Page",Toast.LENGTH_SHORT).show();
+                        pageNum = Math.abs(pageNum + 1);
+                        page = "";
+                        page += pageNum + "/";
+                        if(type.equals("home")){
+                            getHomeGalleries(type,section,sort,page,window);
+                        }
+                        else{
+                            Toast.makeText(thisContext,"Next Page",Toast.LENGTH_SHORT).show();
+                            getSearch(type,section,sort,page,window, currentSearch);
+                        }
+                        break;
+                    case R.id.prev_nav:
+                        Toast.makeText(thisContext,"Previous Page",Toast.LENGTH_SHORT).show();
+                        pageNum = Math.abs(pageNum - 1);
+                        page = "";
+                        page += pageNum + "/";
+                        if(type.equals("home")){
+                            getHomeGalleries(type,section,sort,page,window);
+                        }
+                        else{
+                            getSearch(type,section,sort,page,window, currentSearch);
+                        }
                         break;
                 }
                 return true;
@@ -148,6 +176,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         task.execute(type, section, sort, page, window);
     }
 
+    public void getSearch(String... strings){
+        type = strings[0];
+        section = strings[1];
+        sort = strings[2];
+        page = strings[3];
+        window = strings[4];
+        task = new ImgurImageAsyncTask();
+        task.setListener(new ImgurImageAsyncTask.OnImgurImageFetchResponse() {
+            @Override
+            public void onCallback(ImgurImageList imgurImageList) {
+
+                currentImgurImageList = imgurImageList;
+                setUpRecyclerView();
+            }
+
+        });
+
+        if( strings[5].equals("not searched"))
+            currentSearch = searchEditText.getText().toString();
+        else
+            currentSearch = strings[5];
+        task.execute(type,section, sort, page, window, currentSearch);
+    }
+
     public void searchClicked(final String... strings){
 
         type = strings[0];
@@ -159,15 +211,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 type = "search";
-                task = new ImgurImageAsyncTask();
+                getSearch(type,section, sort, page, window, currentSearch);
+                /*task = new ImgurImageAsyncTask();
                 task.setListener(new ImgurImageAsyncTask.OnImgurImageFetchResponse() {
                     @Override
                     public void onCallback(ImgurImageList imgurImageList) {
-
                         currentImgurImageList = imgurImageList;
                         setUpRecyclerView();
-
-
                     }
 
                 });
@@ -176,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     currentSearch = searchEditText.getText().toString();
                 else
                     currentSearch = strings[5];
-                task.execute(type,section, sort, page, window, currentSearch);
+                task.execute(type,section, sort, page, window, currentSearch);*/
             }
         });
     }
