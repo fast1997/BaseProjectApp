@@ -1,8 +1,12 @@
 package com.sp18.ssu370.WasteYourTime.ui.activities;
 
 import android.Manifest;
+import android.app.VoiceInteractor;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -61,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String window;
     private String currentSearch;
 
+    //opening gallery
+    private static final int PICK_IMAGE = 100;
+    private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
+
                     case R.id.home_nav:
                         Toast.makeText(thisContext,"Home",Toast.LENGTH_SHORT).show();
                         pageNum = 0;
@@ -114,9 +122,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         page += pageNum + "/";
                         getHomeGalleries(type,section,sort,page,window);
                         break;
+
                     case R.id.favorite_nav:
                         Toast.makeText(thisContext,"Favorite",Toast.LENGTH_SHORT).show();
                         break;
+
                     case R.id.next_nav:
                         //Toast.makeText(thisContext,"Next Page",Toast.LENGTH_SHORT).show();
                         pageNum = Math.abs(pageNum + 1);
@@ -130,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             getSearch(type,section,sort,page,window, currentSearch);
                         }
                         break;
+
                     case R.id.prev_nav:
                         Toast.makeText(thisContext,"Previous Page",Toast.LENGTH_SHORT).show();
                         pageNum = Math.abs(pageNum - 1);
@@ -142,11 +153,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             getSearch(type,section,sort,page,window, currentSearch);
                         }
                         break;
+
+                    case R.id.upload_nav:
+                        //openGallery();
+                        break;
                 }
                 return true;
             }
         });
     }
+
+    /*private void openGallery(){
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if( requestCode == RESULT_OK && requestCode == PICK_IMAGE){
+            imageUri = data.getData();
+
+        }
+    }*/
 
     public void setUpSortMenu(){
         sortMenu.addDrawerListener(menuToggle);

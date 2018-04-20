@@ -33,7 +33,6 @@ import java.net.URL;
 
 public class SingleItemActivity extends AppCompatActivity{
 
-    private ImageView singlePic;
     private BottomNavigationView bottomNavigationView;
     private Context thisContext = this;
     private String urlLink;
@@ -44,7 +43,7 @@ public class SingleItemActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_item);
-        //singlePic = findViewById(R.id.single_item_pic);
+
         photoView = findViewById(R.id.single_item_pic);
 
         Intent intent = getIntent();
@@ -77,9 +76,8 @@ public class SingleItemActivity extends AppCompatActivity{
                 switch (item.getItemId()){
 
                     case R.id.save_fav:
-                        Toast.makeText(thisContext,"Saved",Toast.LENGTH_SHORT).show();
                         save(photoView);
-
+                        Toast.makeText(thisContext,"Saved",Toast.LENGTH_SHORT).show();
                         break;
                 }
                 return true;
