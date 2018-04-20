@@ -1,6 +1,8 @@
 package com.sp18.ssu370.WasteYourTime.ui.view;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.sp18.ssu370.WasteYourTime.model.ImgurImage;
 import com.sp18.ssu370.WasteYourTime.model.ImgurImageList;
+import com.sp18.ssu370.WasteYourTime.ui.activities.SingleItemActivity;
 import com.sp18.ssu370.baseprojectapp.R;
 
 import java.util.ArrayList;
@@ -38,12 +41,11 @@ public class ImageRecyclerViewAdapter extends RecyclerView.Adapter<ImageRecycler
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ImageRecyclerViewAdapter.MyBigImgViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ImageRecyclerViewAdapter.MyBigImgViewHolder holder, final int position) {
+
         holder.bigImageTitle.setText(imgList.get(position).getName());
         holder.bigImageDescription.setText(imgList.get(position).getDescription());
 
-        //holder.bigImgThumbnail.getLayoutParams().height = imgList.get(position).getHeight();
-        //holder.bigImgThumbnail.getLayoutParams().width = imgList.get(position).getWidth();
         if(imgList.get(position).isAnimated()){
             GlideDrawableImageViewTarget gifLoad = new GlideDrawableImageViewTarget(holder.bigImgThumbnail);
 
@@ -56,6 +58,19 @@ public class ImageRecyclerViewAdapter extends RecyclerView.Adapter<ImageRecycler
                     .load(imgList.get(position).getUrl())
                     .into(holder.bigImgThumbnail);
         }
+
+        holder.bigImgurImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, SingleItemActivity.class);
+                //pass data to image activity
+                intent.putExtra("ImageURL", imgList.get(position).getUrl());
+                intent.putExtra("Animated", imgList.get(position).isAnimated());
+                //start the activity
+                mContext.startActivity(intent);
+
+            }
+        });
 
     }
 

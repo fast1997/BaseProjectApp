@@ -1,9 +1,12 @@
 package com.sp18.ssu370.WasteYourTime.ui.activities;
 
+import android.Manifest;
 import android.content.Context;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +29,7 @@ import com.sp18.ssu370.WasteYourTime.ui.view.RecyclerViewAdapter;
 import com.sp18.ssu370.baseprojectapp.R;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -57,15 +61,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String window;
     private String currentSearch;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //saving permission
+        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+
         searchEditText = findViewById(R.id.search_edit_text);
         searchButton = findViewById(R.id.my_search_button);
-        gallery = findViewById(R.id.recycler_view_id);
 
+        gallery = findViewById(R.id.recycler_view_id);
         gallery.setHasFixedSize(true);
         gallery.setItemViewCacheSize(20);
         gallery.setDrawingCacheEnabled(true);

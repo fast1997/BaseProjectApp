@@ -56,8 +56,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
          //   if( imgList.getData().get(position).getImages() != null) {
                 final ImgurImage img = imgList.getData().get(position).getImages().get(0);
 
-
-                holder.imageTitle.setText(imgList.getData().get(position).getTitle());
+                if(imgList.getData().get(position).getTitle().length() < 18 ) {
+                    holder.imageTitle.setText(imgList.getData().get(position).getTitle());
+                }
+                else{
+                    String cutName = imgList.getData().get(position).getTitle().substring(0,17) + "...";
+                    holder.imageTitle.setText(cutName);
+                }
+                //holder.imageTitle.setText(imgList.getData().get(position).getTitle());
 
                 if(img.isAnimated()){
                     GlideDrawableImageViewTarget gifLoad = new GlideDrawableImageViewTarget(holder.img_thumbnail);
