@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.github.chrisbanes.photoview.PhotoView;
+import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.sp18.ssu370.baseprojectapp.R;
 
 import java.io.File;
@@ -36,28 +38,33 @@ public class SingleItemActivity extends AppCompatActivity{
     private Context thisContext = this;
     private String urlLink;
     private boolean isAnimated;
+    private PhotoView photoView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_item);
-        singlePic = findViewById(R.id.single_item_pic);
+        //singlePic = findViewById(R.id.single_item_pic);
+        photoView = findViewById(R.id.single_item_pic);
+
         Intent intent = getIntent();
         urlLink = intent.getStringExtra("ImageURL");
         isAnimated = intent.getBooleanExtra("Animated",false);
 
         if(isAnimated){
-            GlideDrawableImageViewTarget gifLoad = new GlideDrawableImageViewTarget(singlePic);
+            GlideDrawableImageViewTarget gifLoad = new GlideDrawableImageViewTarget(photoView);
 
             Glide.with(thisContext)
                     .load(urlLink)
                     .into(gifLoad);
+
         }
         else{
             Glide.with(thisContext)
                     .load(urlLink)
-                    .into(singlePic);
+                    .into(photoView);
         }
+
 
         initBottomNavigation();
         
@@ -71,7 +78,7 @@ public class SingleItemActivity extends AppCompatActivity{
 
                     case R.id.save_fav:
                         Toast.makeText(thisContext,"Saved",Toast.LENGTH_SHORT).show();
-                        save(singlePic);
+                        save(photoView);
 
                         break;
                 }
