@@ -16,6 +16,13 @@
         app:showAsAction= "ifRoom">
     </item>
 
+    <item android:id="@+id/upload_nav"
+        android:enabled="true"
+        android:title="Upload"
+        android:icon="@drawable/ic_upload"
+        app:showAsAction= "ifRoom">
+    </item>
+
     <item android:id="@+id/favorite_nav"
         android:enabled="true"
         android:title="Favorite"

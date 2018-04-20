@@ -12,61 +12,65 @@
     tools:context="com.sp18.ssu370.WasteYourTime.ui.activities.MainActivity">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/black">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
 
- <LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     android:orientation="vertical"
-     android:background="@color/black">
+            <EditText
+                android:id="@+id/search_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/my_search_button"
+                android:background="@color/white"
+                android:hint="Search terms here"
+                android:textColor="@color/black" />
 
-     <RelativeLayout
-         android:id="@+id/relativeLayout"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:orientation="horizontal">
+            <Button
+                android:id="@+id/my_search_button"
+                android:layout_width="41dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="0dp"
+                android:background="@color/black"
+                android:drawableLeft="@drawable/ic_search" />
+        </RelativeLayout>
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-         <EditText
-             android:id="@+id/search_edit_text"
-             android:layout_width="wrap_content"
-             android:layout_height="40dp"
-             android:layout_alignParentStart="true"
-             android:layout_alignParentTop="true"
-             android:layout_toStartOf="@+id/my_search_button"
-             android:background="@color/white"
-             android:hint="Search terms here"
-             android:textColor="@color/black" />
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            app:itemBackground="@color/black"
+            app:itemIconTint="@drawable/bottom_nav_item_color_state"
+            app:itemTextColor="@drawable/bottom_nav_item_color_state"
+            app:menu="@menu/bottom_navigation_menu">
 
-         <Button
-             android:id="@+id/my_search_button"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignParentEnd="true"
-             android:layout_alignParentTop="true"
-             android:layout_marginEnd="0dp"
-             android:text="Search" />
-     </RelativeLayout>
-
-     <android.support.v7.widget.RecyclerView
-         android:id="@+id/recycler_view_id"
-         android:layout_width="match_parent"
-         android:layout_height="460dp">
-     </android.support.v7.widget.RecyclerView>
-
-
-     <android.support.design.widget.BottomNavigationView
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:id="@+id/bottom_navigation"
-     app:itemBackground="@color/black"
-     app:itemIconTint="@drawable/bottom_nav_item_color_state"
-     app:itemTextColor="@drawable/bottom_nav_item_color_state"
-     app:menu="@menu/bottom_navigation_menu"
-     >
-     </android.support.design.widget.BottomNavigationView>
- </LinearLayout>
-
+        </android.support.design.widget.BottomNavigationView>
+    </RelativeLayout>
 
 
 

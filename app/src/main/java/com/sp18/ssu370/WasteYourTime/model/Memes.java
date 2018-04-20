@@ -12,6 +12,10 @@ public class Memes implements Parcelable, Comparable<Memes>{
 
     private boolean newest, oldest, viral = false;
 
+    public Memes(ArrayList<ImgurImage> images) {
+        this.images = images;
+    }
+
     public void setNewest(boolean newest) {
         this.newest = newest;
     }

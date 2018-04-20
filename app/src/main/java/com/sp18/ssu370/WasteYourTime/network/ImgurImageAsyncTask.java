@@ -85,8 +85,8 @@ public  class ImgurImageAsyncTask  extends AsyncTask<String,String,ImgurImageLis
             e.printStackTrace();
         }
 
-
-        return new ImgurImageList(new ArrayList<Memes>());
+        return null;
+        //return new ImgurImageList(new ArrayList<Memes>());
     }
 
     @Override

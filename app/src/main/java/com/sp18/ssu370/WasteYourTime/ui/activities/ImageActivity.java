@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.sp18.ssu370.WasteYourTime.model.Album;
@@ -38,6 +39,10 @@ public class ImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image);
 
         picRecyclerView = findViewById(R.id.big_image_recycler_view_id);
+        picRecyclerView.setHasFixedSize(true);
+        picRecyclerView.setItemViewCacheSize(20);
+        picRecyclerView.setDrawingCacheEnabled(true);
+        picRecyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         title = findViewById(R.id.image_view_galley_id);
 
         //Receive data

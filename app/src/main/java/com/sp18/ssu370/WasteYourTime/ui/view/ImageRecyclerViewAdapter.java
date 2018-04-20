@@ -49,13 +49,11 @@ public class ImageRecyclerViewAdapter extends RecyclerView.Adapter<ImageRecycler
 
             Glide.with(mContext)
                     .load(imgList.get(position).getUrl())
-                    .fitCenter()
                     .into(gifLoad);
         }
         else{
             Glide.with(mContext)
                     .load(imgList.get(position).getUrl())
-                    .fitCenter()
                     .into(holder.bigImgThumbnail);
         }
 

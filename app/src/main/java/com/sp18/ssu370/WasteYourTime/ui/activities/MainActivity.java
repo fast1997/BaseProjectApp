@@ -18,12 +18,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sp18.ssu370.WasteYourTime.model.ImgurImage;
 import com.sp18.ssu370.WasteYourTime.model.ImgurImageList;
+import com.sp18.ssu370.WasteYourTime.model.Memes;
 import com.sp18.ssu370.WasteYourTime.network.ImgurImageAsyncTask;
 import com.sp18.ssu370.WasteYourTime.ui.view.RecyclerViewAdapter;
 import com.sp18.ssu370.baseprojectapp.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
@@ -62,6 +65,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         searchEditText = findViewById(R.id.search_edit_text);
         searchButton = findViewById(R.id.my_search_button);
         gallery = findViewById(R.id.recycler_view_id);
+
+        gallery.setHasFixedSize(true);
+        gallery.setItemViewCacheSize(20);
+        gallery.setDrawingCacheEnabled(true);
+        gallery.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+
         sortMenu = findViewById(R.id.sort_menu_id);
         menuToggle = new ActionBarDrawerToggle(this, sortMenu, R.string.open, R.string.close);
 
@@ -135,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         sortMenu.addDrawerListener(menuToggle);
         menuToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_sort);
         NavigationView navigationView = findViewById(R.id.menu_nav_id);
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -211,6 +220,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 type = "search";
+                page = "0";
+                currentSearch = searchEditText.getText().toString();
                 getSearch(type,section, sort, page, window, currentSearch);
                 /*task = new ImgurImageAsyncTask();
                 task.setListener(new ImgurImageAsyncTask.OnImgurImageFetchResponse() {
@@ -272,12 +283,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if(id == R.id.gif_only_id)
         {
+            ImgurImageList all = new ImgurImageList(currentImgurImageList);
             Toast.makeText(this,"Show GIF Only",Toast.LENGTH_SHORT).show();
-
+            ArrayList<Memes> memesContent = new ArrayList<>();
+            for(int i = 0; i < currentImgurImageList.getData().size(); i++){
+                if( currentImgurImageList.getData().get(i).getImages().get(0).isAnimated() ){
+                    memesContent.add(currentImgurImageList.getData().get(i));
+                }
+            }
+            ImgurImageList gifOnlyContent = new ImgurImageList(memesContent);
+            currentImgurImageList = gifOnlyContent;
+            setUpRecyclerView();
+            currentImgurImageList = all;
         }
         if(id == R.id.img_only_id)
         {
+            ImgurImageList all = new ImgurImageList(currentImgurImageList);
             Toast.makeText(this,"Show IMG Only",Toast.LENGTH_SHORT).show();
+            ArrayList<Memes> picContent = new ArrayList<>();
+            for(int i = 0; i < currentImgurImageList.getData().size(); i++){
+                if( !currentImgurImageList.getData().get(i).getImages().get(0).isAnimated() ){
+                    picContent.add(currentImgurImageList.getData().get(i));
+                }
+            }
+            ImgurImageList picOnlyContent = new ImgurImageList(picContent);
+            currentImgurImageList = picOnlyContent;
+            setUpRecyclerView();
+            currentImgurImageList = all;
         }
         return false;
     }

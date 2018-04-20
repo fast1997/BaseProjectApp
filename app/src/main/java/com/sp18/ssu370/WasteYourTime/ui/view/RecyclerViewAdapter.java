@@ -52,8 +52,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         currentPosition = position;
-        if( imgList.getData().get(position) != null ) {
-            if( imgList.getData().get(position).getImages() != null) {
+        //if( imgList.getData().get(position) != null ) {
+         //   if( imgList.getData().get(position).getImages() != null) {
                 final ImgurImage img = imgList.getData().get(position).getImages().get(0);
 
 
@@ -64,7 +64,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                     Glide.with(mContext)
                             .load(img.getUrl())
-                            .fitCenter()
                             .into(gifLoad);
                 }
                 else{
@@ -91,8 +90,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                     }
                 });
-            }
-        }
+         //   }
+           // else{
+           //     return;
+           // }
+       /* }
+        else{
+            return;
+        }*/
         //imgListIdx++;
     }
 

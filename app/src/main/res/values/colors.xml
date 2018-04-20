@@ -20,4 +20,5 @@
     <color name="navy">#000080</color>
     <color name="black">#000000</color>
     <color name="darkgray">#6c6c6c</color>
+    <color name="darkergray">#1b1b1b</color>
 </resources>

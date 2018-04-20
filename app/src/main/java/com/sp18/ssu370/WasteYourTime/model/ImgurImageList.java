@@ -23,6 +23,10 @@ public class ImgurImageList implements Parcelable{
         data = in.readArrayList(Memes.class.getClassLoader());
     }
 
+    public ImgurImageList(ImgurImageList i){
+        data = i.data;
+    }
+
     public ImgurImageList(ArrayList<Memes> data) {
         this.data = data;
     }

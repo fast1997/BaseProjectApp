@@ -13,24 +13,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/darkgray">
+        android:background="@color/darkergray">
 
         <ImageView
             android:id="@+id/meme_image_id"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:background="@color/darkgray"/>
+            android:background="@color/darkergray">
+
+        </ImageView>
 
         <TextView
             android:id="@+id/meme_title_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/darkgray"
+            android:background="@color/darkergray"
             android:textColor="@color/white"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textSize="17sp"
             android:gravity="center"
-            android:text="Hello World"/>
+            android:text="Hello World">
+
+        </TextView>
         
     </LinearLayout>
 
