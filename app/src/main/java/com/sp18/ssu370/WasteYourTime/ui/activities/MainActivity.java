@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String currentSearch;
 
     private DatabaseHelper databaseHelper = new DatabaseHelper(this);
-    private static int favIdx = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -190,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ArrayList<Memes> favMemes = new ArrayList<>();
         ArrayList<ImgurImage> favImg;
 
-
+        int favIdx = 1;
         while( data.moveToNext() ){
             String favoriteTitle = "Favorite " + favIdx;
 
