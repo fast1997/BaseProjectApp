@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String currentSearch;
 
     private DatabaseHelper databaseHelper = new DatabaseHelper(this);
+    private boolean favoriteViewOn = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,10 +113,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         searchClicked(type,section,sort,page,window, currentSearch);
     }
 
-    private static String getGalleryPath() {
-        return Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_PICTURES + "/";
-
-    }
     public void initBottomNavigation(){
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -123,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 switch (item.getItemId()){
 
                     case R.id.home_nav:
+                        favoriteViewOn = false;
                         Toast.makeText(thisContext,"Home",Toast.LENGTH_SHORT).show();
                         pageNum = 0;
                         type = "home";
@@ -132,46 +131,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         break;
 
                     case R.id.favorite_nav:
+                        favoriteViewOn = true;
                         Toast.makeText(thisContext,"Favorite",Toast.LENGTH_SHORT).show();
                         populateFavorites();
                         setUpRecyclerView();
                         break;
 
                     case R.id.next_nav:
-
-                        if(pageNum >= 0) {
-                            pageNum = pageNum + 1;
-                            page = "";
-                            page += pageNum + "/";
-                        }
-                        if(type.equals("home")){
-                            getHomeGalleries(type,section,sort,page,window);
+                        if( !favoriteViewOn ) {
+                            if (pageNum >= 0) {
+                                pageNum = pageNum + 1;
+                                page = "";
+                                page += pageNum + "/";
+                            }
+                            if (type.equals("home")) {
+                                getHomeGalleries(type, section, sort, page, window);
+                            } else {
+                                Toast.makeText(thisContext, "Next Page", Toast.LENGTH_SHORT).show();
+                                getSearch(type, section, sort, page, window, currentSearch);
+                            }
+                            Toast.makeText(thisContext, "Next Page", Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            Toast.makeText(thisContext,"Next Page",Toast.LENGTH_SHORT).show();
-                            getSearch(type,section,sort,page,window, currentSearch);
+                            Toast.makeText(thisContext, "Nope.", Toast.LENGTH_SHORT).show();
                         }
-                        Toast.makeText(thisContext,"Next Page",Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.prev_nav:
-
-                        if( pageNum > 0) {
-                            pageNum = pageNum - 1;
-                            page = "";
-                            page += pageNum + "/";
+                        if(!favoriteViewOn) {
+                            if (pageNum > 0) {
+                                pageNum = pageNum - 1;
+                                page = "";
+                                page += pageNum + "/";
+                            } else {
+                                Toast.makeText(thisContext, "Already at First", Toast.LENGTH_SHORT).show();
+                                break;
+                            }
+                            if (type.equals("home")) {
+                                getHomeGalleries(type, section, sort, page, window);
+                            } else {
+                                getSearch(type, section, sort, page, window, currentSearch);
+                            }
+                            Toast.makeText(thisContext, "Previous Page", Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            Toast.makeText(thisContext,"Already at First",Toast.LENGTH_SHORT).show();
-                            break;
+                            Toast.makeText(thisContext, "Nope.", Toast.LENGTH_SHORT).show();
                         }
-                        if(type.equals("home")){
-                            getHomeGalleries(type,section,sort,page,window);
-                        }
-                        else{
-                            getSearch(type,section,sort,page,window, currentSearch);
-                        }
-                        Toast.makeText(thisContext,"Previous Page",Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.upload_nav:
@@ -259,6 +264,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void getSearch(String... strings){
+        favoriteViewOn = false;
         type = strings[0];
         section = strings[1];
         sort = strings[2];
