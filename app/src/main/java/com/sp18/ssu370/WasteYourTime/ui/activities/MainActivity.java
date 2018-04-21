@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.VoiceInteractor;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -17,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -30,6 +32,7 @@ import com.sp18.ssu370.WasteYourTime.model.ImgurImage;
 import com.sp18.ssu370.WasteYourTime.model.ImgurImageList;
 import com.sp18.ssu370.WasteYourTime.model.Memes;
 import com.sp18.ssu370.WasteYourTime.network.ImgurImageAsyncTask;
+import com.sp18.ssu370.WasteYourTime.ui.util.DatabaseHelper;
 import com.sp18.ssu370.WasteYourTime.ui.view.RecyclerViewAdapter;
 import com.sp18.ssu370.baseprojectapp.R;
 import com.squareup.picasso.Picasso;
@@ -66,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String window;
     private String currentSearch;
 
-
+    private DatabaseHelper databaseHelper = new DatabaseHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +112,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         searchClicked(type,section,sort,page,window, currentSearch);
     }
 
+    private static String getGalleryPath() {
+        return Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_PICTURES + "/";
+
+    }
     public void initBottomNavigation(){
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -127,6 +134,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     case R.id.favorite_nav:
                         Toast.makeText(thisContext,"Favorite",Toast.LENGTH_SHORT).show();
+                        populateFavorites();
+                        setUpRecyclerView();
                         break;
 
                     case R.id.next_nav:
@@ -166,7 +175,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
+    public void populateFavorites(){
+        Cursor data = databaseHelper.getData();
+        ImgurImageList favList;
+        ArrayList<Memes> favMemes = new ArrayList<>();
+        ArrayList<ImgurImage> favImg;
 
+        int favIdx = 1;
+        while( data.moveToNext() ){
+            String favoriteTitle = "Favorite " + favIdx;
+
+            favImg = new ArrayList<>();
+            ImgurImage temp;
+            if( data.getInt(2) == 1){
+                temp = new ImgurImage(data.getString(1), true);
+            }
+            else {
+                temp = new ImgurImage(data.getString(1), false);
+            }
+            favImg.add(temp);
+
+            Memes memes = new Memes(favImg, favoriteTitle);
+            favMemes.add(memes);
+        }
+
+        favList = new ImgurImageList(favMemes);
+        currentImgurImageList = favList;
+    }
 
     public void setUpSortMenu(){
         sortMenu.addDrawerListener(menuToggle);
@@ -251,21 +286,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 page = "0";
                 currentSearch = searchEditText.getText().toString();
                 getSearch(type,section, sort, page, window, currentSearch);
-                /*task = new ImgurImageAsyncTask();
-                task.setListener(new ImgurImageAsyncTask.OnImgurImageFetchResponse() {
-                    @Override
-                    public void onCallback(ImgurImageList imgurImageList) {
-                        currentImgurImageList = imgurImageList;
-                        setUpRecyclerView();
-                    }
-
-                });
-
-                if( strings[5].equals("not searched"))
-                    currentSearch = searchEditText.getText().toString();
-                else
-                    currentSearch = strings[5];
-                task.execute(type,section, sort, page, window, currentSearch);*/
             }
         });
     }

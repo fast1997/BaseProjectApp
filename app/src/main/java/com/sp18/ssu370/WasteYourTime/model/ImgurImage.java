@@ -38,6 +38,11 @@ public class ImgurImage implements Parcelable{
         url = in.readString();
     }
 
+    public ImgurImage( String url,boolean animated) {
+        this.animated = animated;
+        this.url = url;
+    }
+
     @Override
     public int describeContents() {
         return 0;

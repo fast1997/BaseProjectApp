@@ -2,11 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/save_fav"
+    <item android:id="@+id/favorite"
         android:enabled="true"
         android:title="Favorite"
         android:icon="@drawable/ic_favorite"
         app:showAsAction="ifRoom">
     </item>
+
+    <item android:id="@+id/download"
+        android:enabled="true"
+        android:title="Download"
+        android:icon="@drawable/ic_download"
+        app:showAsAction="ifRoom">
+    </item>
+
 
 </menu>

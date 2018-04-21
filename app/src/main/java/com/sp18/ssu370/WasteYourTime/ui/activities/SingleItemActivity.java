@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.github.chrisbanes.photoview.PhotoViewAttacher;
+import com.sp18.ssu370.WasteYourTime.ui.util.DatabaseHelper;
 import com.sp18.ssu370.baseprojectapp.R;
 
 import java.io.File;
@@ -38,6 +39,7 @@ public class SingleItemActivity extends AppCompatActivity{
     private String urlLink;
     private boolean isAnimated;
     private PhotoView photoView;
+    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class SingleItemActivity extends AppCompatActivity{
         setContentView(R.layout.single_item);
 
         photoView = findViewById(R.id.single_item_pic);
+        databaseHelper = new DatabaseHelper(thisContext);
 
         Intent intent = getIntent();
         urlLink = intent.getStringExtra("ImageURL");
@@ -75,14 +78,34 @@ public class SingleItemActivity extends AppCompatActivity{
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
 
-                    case R.id.save_fav:
+                    case R.id.download:
                         save(photoView);
                         Toast.makeText(thisContext,"Saved",Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case R.id.favorite:
+                        String newEntry = urlLink;
+                        if(newEntry.length() > 0 ){
+                            favorite(newEntry, isAnimated);
+                        }
+                        else {
+                            Toast.makeText(thisContext,"Something Went Wrong",Toast.LENGTH_SHORT).show();
+                        }
                         break;
                 }
                 return true;
             }
         });
+    }
+
+    public void favorite(String newEntry, boolean isAnimated){
+        boolean insertData = databaseHelper.addData(newEntry, isAnimated);
+        if(insertData){
+            Toast.makeText(thisContext,"Favorited",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(thisContext,"Something Went Wrong",Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void save(ImageView imageView){
