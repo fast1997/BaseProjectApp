@@ -27,6 +27,12 @@ public class ImgurImage implements Parcelable{
     @SerializedName("link")
     private String url;
 
+    private boolean favorited = false;
+
+
+    public boolean isFavorited() {
+        return favorited;
+    }
 
     private ImgurImage(Parcel in) {
         id = in.readString();
@@ -41,6 +47,7 @@ public class ImgurImage implements Parcelable{
     public ImgurImage( String url,boolean animated) {
         this.animated = animated;
         this.url = url;
+        favorited = true;
     }
 
     @Override

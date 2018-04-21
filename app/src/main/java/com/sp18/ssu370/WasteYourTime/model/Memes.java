@@ -11,6 +11,11 @@ import java.util.ArrayList;
 public class Memes implements Parcelable, Comparable<Memes>{
 
     private boolean newest, oldest, viral = false;
+    private boolean favorite = false;
+
+    public boolean isFavorite() {
+        return favorite;
+    }
 
     public Memes(ArrayList<ImgurImage> images) {
         this.images = images;
@@ -114,5 +119,9 @@ public class Memes implements Parcelable, Comparable<Memes>{
                 return memes.datetime - datetime;
             }
             return 0;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 }

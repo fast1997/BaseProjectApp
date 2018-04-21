@@ -32,6 +32,7 @@ public class ImageActivity extends AppCompatActivity {
 
     private AlbumAsyncTask task;
 
+
     @SuppressWarnings("unchecked")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,8 +50,9 @@ public class ImageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String galleryTitle = intent.getStringExtra("GalleryTitle");
         Bundle args = intent.getBundleExtra("AllImg");
-        //allPics = (ArrayList<ImgurImage>) args.getSerializable("ImageArrayList");
+        final ArrayList<ImgurImage> allPics = (ArrayList<ImgurImage>) args.getSerializable("ImageArrayList");
         String galID = intent.getStringExtra("GalleryID");
+        final boolean favorited = intent.getBooleanExtra("Favorited", false);
 
         title.setText(galleryTitle);
 
@@ -58,8 +60,12 @@ public class ImageActivity extends AppCompatActivity {
         task.setListener(new AlbumAsyncTask.OnAlbumFetchResponse() {
             @Override
             public void onCallback(Album album) {
-
-                currentAlbumPics = album.getSingleData().getImages();
+                if(!favorited) {
+                    currentAlbumPics = album.getSingleData().getImages();
+                }
+                else {
+                    currentAlbumPics = allPics;
+                }
                 setUpRecyclerView();
             }
         });

@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String currentSearch;
 
     private DatabaseHelper databaseHelper = new DatabaseHelper(this);
-
+    private static int favIdx = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,10 +139,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         break;
 
                     case R.id.next_nav:
-                        //Toast.makeText(thisContext,"Next Page",Toast.LENGTH_SHORT).show();
-                        pageNum = Math.abs(pageNum + 1);
-                        page = "";
-                        page += pageNum + "/";
+
+                        if(pageNum >= 0) {
+                            pageNum = pageNum + 1;
+                            page = "";
+                            page += pageNum + "/";
+                        }
                         if(type.equals("home")){
                             getHomeGalleries(type,section,sort,page,window);
                         }
@@ -150,19 +152,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Toast.makeText(thisContext,"Next Page",Toast.LENGTH_SHORT).show();
                             getSearch(type,section,sort,page,window, currentSearch);
                         }
+                        Toast.makeText(thisContext,"Next Page",Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.prev_nav:
-                        Toast.makeText(thisContext,"Previous Page",Toast.LENGTH_SHORT).show();
-                        pageNum = Math.abs(pageNum - 1);
-                        page = "";
-                        page += pageNum + "/";
+
+                        if( pageNum > 0) {
+                            pageNum = pageNum - 1;
+                            page = "";
+                            page += pageNum + "/";
+                        }
+                        else {
+                            Toast.makeText(thisContext,"Already at First",Toast.LENGTH_SHORT).show();
+                            break;
+                        }
                         if(type.equals("home")){
                             getHomeGalleries(type,section,sort,page,window);
                         }
                         else{
                             getSearch(type,section,sort,page,window, currentSearch);
                         }
+                        Toast.makeText(thisContext,"Previous Page",Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.upload_nav:
@@ -177,11 +187,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void populateFavorites(){
         Cursor data = databaseHelper.getData();
-        ImgurImageList favList;
         ArrayList<Memes> favMemes = new ArrayList<>();
         ArrayList<ImgurImage> favImg;
 
-        int favIdx = 1;
+
         while( data.moveToNext() ){
             String favoriteTitle = "Favorite " + favIdx;
 
@@ -196,11 +205,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             favImg.add(temp);
 
             Memes memes = new Memes(favImg, favoriteTitle);
+            memes.setFavorite(true);
             favMemes.add(memes);
+            favIdx++;
         }
 
-        favList = new ImgurImageList(favMemes);
-        currentImgurImageList = favList;
+        currentImgurImageList = new ImgurImageList(favMemes);
+
     }
 
     public void setUpSortMenu(){

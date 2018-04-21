@@ -91,6 +91,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         intent.putExtra("GalleryTitle", imgList.getData().get(position).getTitle());
                         intent.putExtra("AllImg", args);
                         intent.putExtra("GalleryID",imgList.getData().get(position).getId());
+                        intent.putExtra("Favorited", imgList.getData().get(position).isFavorite());
                         //start the activity
                         mContext.startActivity(intent);
 
