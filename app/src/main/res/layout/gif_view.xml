@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/image_view_id"
     android:clickable="true"
     android:orientation="vertical"
@@ -12,27 +12,26 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/darkgray"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/darkgray">
 
-        <ja.burhanrashid52.photoeditor.PhotoEditorView
-            android:id="@+id/meme_image_id"
+        <com.felipecsl.gifimageview.library.GifImageView
+            android:id="@+id/gif_image_id"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:background="@color/darkgray"
             android:scaleType="centerCrop"
-            app:photo_src="@drawable/joyofmotion" />
+            android:background="@color/darkgray"/>
 
         <TextView
-            android:id="@+id/meme_title_id"
+            android:id="@+id/gif_title_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/darkgray"
-            android:gravity="center"
-            android:text="Hello World"
             android:textColor="@color/white"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            android:gravity="center"
+            android:text="Hello World"/>
 
         <Button
             android:id="@+id/button"
@@ -40,6 +39,7 @@
             android:layout_height="wrap_content"
             android:text="Button"
             android:visibility="visible" />
+
     </LinearLayout>
 
 </LinearLayout>
