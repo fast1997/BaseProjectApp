@@ -39,4 +39,9 @@ public class GifActivity extends AppCompatActivity{
         super.onStop();
         gifImageView.stopAnimation();
     }
+
+    //ImageView imageView = (ImageView) findViewById(R.id.imageView);
+    //GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(imageView);
+    //
+    //Glide.with(this).load(R.raw.sample_gif).into(imageViewTarget);
 }

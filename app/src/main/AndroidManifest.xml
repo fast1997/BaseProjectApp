@@ -38,6 +38,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.sp18.ssu370.WasteYourTime.ui.activities.EditImageActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
