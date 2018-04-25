@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //keyboard only show when edite text is clicked
+        //keyboard only show when edit text is clicked
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         //saving permission
@@ -180,7 +180,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         break;
 
                     case R.id.upload_nav:
-                        Intent upload = new Intent(thisContext, UploadActivity.class);
+                        //Intent upload = new Intent(thisContext, UploadActivity.class);
+                        //thisContext.startActivity(upload);
+                        Intent upload = new Intent(thisContext, EditImageActivity.class);
                         thisContext.startActivity(upload);
                         break;
                 }

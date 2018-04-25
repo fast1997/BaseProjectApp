@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/image_view_id"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="475dp"
+    android:layout_margin="15dp"
+    android:background="@color/darkgray"
+    android:layout_gravity="center_horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/darkgray"
+        android:orientation="vertical">
+
+        <ja.burhanrashid52.photoeditor.PhotoEditorView
+            android:id="@+id/image_id"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:background="@color/darkgray"
+            android:scaleType="centerCrop"
+            app:photo_src="@drawable/joyofmotion" />
+
+        <TextView
+            android:id="@+id/meme_title_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/darkgray"
+            android:gravity="center"
+            android:text="Hello World"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/draw_button"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="Draw"
+                android:background="@color/teal"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                android:layout_marginStart="5dp"
+                />
+
+            <Button
+                android:id="@+id/erase_button"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="erase"
+                android:background="@color/teal"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                android:layout_marginStart="5dp"
+                />
+
+            <Button
+                android:id="@+id/text_button"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="Text"
+                android:background="@color/teal"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                android:layout_marginStart="5dp"
+                />
+
+            <Button
+                android:id="@+id/undo_button"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="Undo"
+                android:background="@color/teal"
+                android:textColor="@color/white"
+                android:layout_marginStart="5dp"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
