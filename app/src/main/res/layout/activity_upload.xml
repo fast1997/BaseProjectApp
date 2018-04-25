@@ -32,7 +32,8 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:background="@color/black"
-                android:drawableTop="@drawable/ic_cancel" />
+                android:drawableTop="@drawable/ic_cancel"
+                android:onClick="onCancel" />
 
             <Button
                 android:id="@+id/post_upload_id"
@@ -40,11 +41,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:background="@color/black"
-                android:drawableTop="@drawable/ic_post" />
+                android:drawableTop="@drawable/ic_post"
+                android:onClick="onUpload" />
 
 
             <EditText
-                android:id="@+id/upload_title_id"
+                android:id="@+id/name"
                 android:layout_width="336dp"
                 android:layout_height="40dp"
                 android:layout_alignParentTop="true"
@@ -52,7 +54,7 @@
                 android:layout_marginTop="62dp"
                 android:background="@color/white"
                 android:hint="@string/titleEnter"
-                android:inputType="text"
+                android:inputType="textCapSentences"
                 android:textColor="@color/black" />
 
 
@@ -86,7 +88,7 @@
                 android:gravity="center">
 
                 <EditText
-                    android:id="@+id/upload_description_id"
+                    android:id="@+id/description"
                     android:layout_width="360dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -113,6 +115,7 @@
                 android:layout_centerHorizontal="true"
                 android:background="@color/black"
                 android:drawableTop="@drawable/ic_open_gallery"
+                android:onClick="onChoose"
                 android:textColor="@color/white" />
         </RelativeLayout>
 
