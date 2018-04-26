@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.sp18.ssu370.WasteYourTime.ui.util.TextEditorDialogFragment;
 import com.sp18.ssu370.baseprojectapp.R;
 
 import ja.burhanrashid52.photoeditor.PhotoEditor;
@@ -67,7 +68,6 @@ public class EditImageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 toggleTextButton();
-                photoEditor.addText("Hi", R.color.white);
             }
         });
 
@@ -116,6 +116,14 @@ public class EditImageActivity extends AppCompatActivity {
     }
 
     public void toggleTextButton() {
+        TextEditorDialogFragment textEditorDialogFragment = TextEditorDialogFragment.show(this);
+        textEditorDialogFragment.setOnTextEditorListener(
+                new TextEditorDialogFragment.TextEditor() {
+            @Override
+            public void onDone(String text, int color) {
+                    photoEditor.addText(text, color);
+            }
+        });
         if (eraseCurrentState) {
             eraseButton.setBackgroundColor(getResources().getColor(R.color.teal));
             eraseCurrentState = false;
