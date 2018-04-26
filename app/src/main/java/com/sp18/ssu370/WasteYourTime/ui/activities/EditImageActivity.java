@@ -1,5 +1,6 @@
 package com.sp18.ssu370.WasteYourTime.ui.activities;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,16 +16,23 @@ import ja.burhanrashid52.photoeditor.PhotoEditorView;
 
 public class EditImageActivity extends AppCompatActivity {
 
+    boolean drawCurrentState = false;
+    boolean eraseCurrentState = false;
+
+    Button drawButton;
+    Button eraseButton;
+
+    PhotoEditor photoEditor;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_image_view);
 
-        final Button drawButton = findViewById(R.id.draw_button);
-        final Button eraseButton = findViewById(R.id.erase_button);
+        drawButton = findViewById(R.id.draw_button);
+        eraseButton = findViewById(R.id.erase_button);
         Button textButton = findViewById(R.id.text_button);
         Button undoButton = findViewById(R.id.undo_button);
-
 
         PhotoEditorView photoEditorView = findViewById(R.id.image_id);
         photoEditorView.getSource().setImageResource(R.drawable.joyofmotion);
@@ -32,64 +40,25 @@ public class EditImageActivity extends AppCompatActivity {
         Typeface font = ResourcesCompat.getFont(this, R.font.roboto_regular);
         //Typeface emoji = Typeface.createFromAsset(getAssets(), "emojione-android.ttf");
 
-        final PhotoEditor photoEditor = new PhotoEditor.Builder(this, photoEditorView)
+        photoEditor = new PhotoEditor.Builder(this, photoEditorView)
                 .setPinchTextScalable(true)
                 .setDefaultTextTypeface(font)
                 //.setDefaultEmojiTypeface(emoji)
                 .build();
 
         drawButton.setOnClickListener(new View.OnClickListener() {
-            boolean drawCurrentState = false;
 
             @Override
             public void onClick(View view) {
-                drawCurrentState = !drawCurrentState;
-                if (drawCurrentState) {
-                    turnOn(view);
-                }
-                else
-                {
-                    turnOff(view);
-                }
-            }
-
-            public void turnOn(View view) {
-                photoEditor.setBrushDrawingMode(true);
-                view.setBackgroundColor(getResources().getColor(R.color.darkteal));
-                drawCurrentState = true;
-            }
-
-            public void turnOff(View view) {
-                photoEditor.setBrushDrawingMode(false);
-                view.setBackgroundColor(getResources().getColor(R.color.teal));
-                drawCurrentState = false;
+                toggleDrawButton();
             }
         });
 
         eraseButton.setOnClickListener(new View.OnClickListener() {
-            boolean eraseCurrentState = false;
 
             @Override
             public void onClick(View view) {
-                eraseCurrentState = !eraseCurrentState;
-                if (eraseCurrentState) {
-                    turnOn(view);
-                }
-                else {
-                    turnOff(view);
-                }
-            }
-
-            public void turnOn(View view) {
-                photoEditor.brushEraser();
-                view.setBackgroundColor(getResources().getColor(R.color.darkteal));
-                eraseCurrentState = true;
-            }
-
-            public void turnOff(View view) {
-                photoEditor.setBrushDrawingMode(false);
-                view.setBackgroundColor(getResources().getColor(R.color.teal));
-                eraseCurrentState = false;
+                toggleEraseButton();
             }
         });
 
@@ -108,5 +77,39 @@ public class EditImageActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void toggleDrawButton() {
+        drawCurrentState = !drawCurrentState;
+        if (drawCurrentState) {
+            photoEditor.setBrushDrawingMode(true);
+            drawButton.setBackgroundColor(getResources().getColor(R.color.darkteal));
+
+            if (eraseCurrentState) {
+                eraseButton.setBackgroundColor(getResources().getColor(R.color.teal));
+                eraseCurrentState = false;
+            }
+        }
+        else {
+            photoEditor.setBrushDrawingMode(false);
+            drawButton.setBackgroundColor(getResources().getColor(R.color.teal));
+        }
+    }
+
+    public void toggleEraseButton() {
+        eraseCurrentState = !eraseCurrentState;
+        if (eraseCurrentState) {
+            photoEditor.brushEraser();
+            eraseButton.setBackgroundColor(getResources().getColor(R.color.darkteal));
+
+            if (drawCurrentState) {
+                drawButton.setBackgroundColor(getResources().getColor(R.color.teal));
+                drawCurrentState = false;
+            }
+        }
+        else {
+            photoEditor.setBrushDrawingMode(false);
+            eraseButton.setBackgroundColor(getResources().getColor(R.color.teal));
+        }
     }
 }
