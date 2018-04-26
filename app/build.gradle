@@ -55,4 +55,7 @@ dependencies {
 
     //Image Editor
     implementation 'ja.burhanrashid52:photoeditor:0.1.1'
+
+    //adding gif to splash page
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.4'
 }
