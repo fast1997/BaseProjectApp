@@ -21,6 +21,7 @@ public class EditImageActivity extends AppCompatActivity {
 
     Button drawButton;
     Button eraseButton;
+    Button textButton;
 
     PhotoEditor photoEditor;
 
@@ -31,7 +32,7 @@ public class EditImageActivity extends AppCompatActivity {
 
         drawButton = findViewById(R.id.draw_button);
         eraseButton = findViewById(R.id.erase_button);
-        Button textButton = findViewById(R.id.text_button);
+        textButton = findViewById(R.id.text_button);
         Button undoButton = findViewById(R.id.undo_button);
 
         PhotoEditorView photoEditorView = findViewById(R.id.image_id);
@@ -65,6 +66,7 @@ public class EditImageActivity extends AppCompatActivity {
         textButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                toggleTextButton();
                 photoEditor.addText("Hi", R.color.white);
             }
         });
@@ -110,6 +112,17 @@ public class EditImageActivity extends AppCompatActivity {
         else {
             photoEditor.setBrushDrawingMode(false);
             eraseButton.setBackgroundColor(getResources().getColor(R.color.teal));
+        }
+    }
+
+    public void toggleTextButton() {
+        if (eraseCurrentState) {
+            eraseButton.setBackgroundColor(getResources().getColor(R.color.teal));
+            eraseCurrentState = false;
+        }
+        if (drawCurrentState) {
+            drawButton.setBackgroundColor(getResources().getColor(R.color.teal));
+            drawCurrentState = false;
         }
     }
 }
