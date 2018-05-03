@@ -19,24 +19,27 @@
         <ja.burhanrashid52.photoeditor.PhotoEditorView
             android:id="@+id/image_id"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
             android:background="@color/darkgray"
             android:scaleType="centerCrop"
             app:photo_src="@drawable/joyofmotion" />
 
-        <TextView
-            android:id="@+id/meme_title_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/darkgray"
-            android:gravity="center"
-            android:text="Hello World"
-            android:textColor="@color/white"
-            android:textSize="17sp" />
+        <SeekBar
+            android:id="@+id/brush_sizebar"
+            android:layout_width="275dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"/>
+
+        <SeekBar
+            android:id="@+id/brush_colorbar"
+            android:layout_width="275dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingTop="3dp">
 
             <Button
                 android:id="@+id/draw_button"
@@ -70,7 +73,6 @@
                 android:visibility="visible"
                 android:layout_marginStart="5dp"
                 />
-
             <Button
                 android:id="@+id/undo_button"
                 android:layout_width="60dp"
