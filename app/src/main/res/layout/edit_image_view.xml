@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/image_view_id"
     android:clickable="true"
     android:orientation="vertical"
-    android:layout_width="300dp"
-    android:layout_height="475dp"
-    android:layout_margin="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/darkgray"
     android:layout_gravity="center_horizontal">
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/darkgray"
@@ -28,63 +28,84 @@
             android:id="@+id/brush_sizebar"
             android:layout_width="275dp"
             android:layout_height="match_parent"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="387dp" />
 
         <SeekBar
             android:id="@+id/brush_colorbar"
             android:layout_width="275dp"
             android:layout_height="match_parent"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            tools:layout_editor_absoluteX="36dp"
+            tools:layout_editor_absoluteY="309dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="3dp">
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="387dp"
+            android:layout_height="82dp"
+            android:paddingTop="3dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="414dp">
 
             <Button
                 android:id="@+id/draw_button"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
+                android:layout_width="83dp"
+                android:layout_height="67dp"
+                android:background="@drawable/ic_paintBrush"
+                android:backgroundTint="@color/teal"
+                android:fontFamily="monospace"
+                android:gravity="top|center"
+                android:shadowColor="@color/aqua"
                 android:text="Draw"
-                android:background="@color/teal"
-                android:textColor="@color/white"
+                android:textColor="@color/silver"
                 android:visibility="visible"
-                android:layout_marginStart="5dp"
-                />
+                tools:layout_editor_absoluteX="7dp"
+                tools:layout_editor_absoluteY="8dp" />
 
             <Button
                 android:id="@+id/erase_button"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
+                android:layout_width="83dp"
+                android:layout_height="73dp"
+
+                android:background="@drawable/ic_Blue_eraser"
+                android:fontFamily="monospace"
+                android:gravity="top|center"
                 android:text="erase"
-                android:background="@color/teal"
-                android:textColor="@color/white"
+                android:textColor="@color/silver"
                 android:visibility="visible"
-                android:layout_marginStart="5dp"
-                />
+                tools:layout_editor_absoluteX="204dp"
+                tools:layout_editor_absoluteY="3dp" />
 
             <Button
                 android:id="@+id/text_button"
-                android:layout_width="60dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Text"
+
                 android:background="@color/teal"
+                android:text="Text"
                 android:textColor="@color/white"
                 android:visibility="visible"
-                android:layout_marginStart="5dp"
-                />
+                tools:layout_editor_absoluteX="292dp"
+                tools:layout_editor_absoluteY="17dp" />
+
             <Button
                 android:id="@+id/undo_button"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
+                android:layout_width="52dp"
+                android:layout_height="23dp"
+
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/ic_Undo "
+                android:backgroundTint="@color/white"
+                android:fontFamily="monospace"
                 android:text="Undo"
-                android:background="@color/teal"
-                android:textColor="@color/white"
-                android:layout_marginStart="5dp"
-                android:visibility="visible" />
+                android:textColor="@color/silver"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:layout_editor_absoluteX="103dp" />
 
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
 
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>
