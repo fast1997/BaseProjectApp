@@ -1,6 +1,5 @@
 package com.sp18.ssu370.WasteYourTime.ui.activities;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.SeekBar;
 
+import com.sp18.ssu370.WasteYourTime.ui.util.TextEditorDialogFragment;
 import com.sp18.ssu370.baseprojectapp.R;
 
 import ja.burhanrashid52.photoeditor.PhotoEditor;
@@ -161,22 +161,22 @@ public class EditImageActivity extends AppCompatActivity {
     }
 
     public void toggleTextButton() {
-//        TextEditorDialogFragment textEditorDialogFragment = TextEditorDialogFragment.show(this);
-//        textEditorDialogFragment.setOnTextEditorListener(
-//                new TextEditorDialogFragment.TextEditor() {
-//            @Override
-//            public void onDone(String text, int color) {
-//                    photoEditor.addText(text, color);
-//            }
-//        });
-//        if (eraseCurrentState) {
-//            eraseButton.setBackgroundColor(getResources().getColor(R.color.teal));
-//            eraseCurrentState = false;
-//        }
-//        if (drawCurrentState) {
-//            drawButton.setBackgroundColor(getResources().getColor(R.color.teal));
-//            drawCurrentState = false;
-//        }
+        TextEditorDialogFragment textEditorDialogFragment = TextEditorDialogFragment.show(this);
+        textEditorDialogFragment.setOnTextEditorListener(
+                new TextEditorDialogFragment.TextEditor() {
+            @Override
+            public void onDone(String text, int color) {
+                    photoEditor.addText(text, color);
+            }
+        });
+        if (eraseCurrentState) {
+            eraseButton.setBackgroundColor(getResources().getColor(R.color.teal));
+            eraseCurrentState = false;
+        }
+        if (drawCurrentState) {
+            drawButton.setBackgroundColor(getResources().getColor(R.color.teal));
+            drawCurrentState = false;
+        }
     }
 
     public void alterBrushSize(int size) {
