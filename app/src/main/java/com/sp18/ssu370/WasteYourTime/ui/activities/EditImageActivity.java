@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SeekBar;
 
 import com.sp18.ssu370.WasteYourTime.ui.util.TextEditorDialogFragment;
@@ -161,14 +162,16 @@ public class EditImageActivity extends AppCompatActivity {
     }
 
     public void toggleTextButton() {
-        TextEditorDialogFragment textEditorDialogFragment = TextEditorDialogFragment.show(this);
-        textEditorDialogFragment.setOnTextEditorListener(
-                new TextEditorDialogFragment.TextEditor() {
+        TextEditorDialogFragment editorDialogFragment = new TextEditorDialogFragment();
+        editorDialogFragment.setOnTextEditorListener(new TextEditorDialogFragment.TextEditor() {
             @Override
-            public void onDone(String text, int color) {
-                    photoEditor.addText(text, color);
+            public void onDone(String text) {
+                photoEditor.addText(text, getResources().getColor(R.color.black));
             }
         });
+
+        editorDialogFragment.show(getSupportFragmentManager(), "Text_Editor");
+
         if (eraseCurrentState) {
             eraseButton.setBackgroundColor(getResources().getColor(R.color.teal));
             eraseCurrentState = false;
