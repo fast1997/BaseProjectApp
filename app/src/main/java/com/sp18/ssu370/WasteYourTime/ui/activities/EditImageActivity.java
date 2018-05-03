@@ -162,10 +162,13 @@ public class EditImageActivity extends AppCompatActivity {
     }
 
     public void toggleTextButton() {
+        textButton.setBackgroundColor(getResources().getColor(R.color.darkteal));
+
         TextEditorDialogFragment editorDialogFragment = new TextEditorDialogFragment();
         editorDialogFragment.setOnTextEditorListener(new TextEditorDialogFragment.TextEditor() {
             @Override
             public void onDone(String text) {
+                textButton.setBackgroundColor(getResources().getColor(R.color.teal));
                 photoEditor.addText(text, getResources().getColor(R.color.black));
             }
         });
