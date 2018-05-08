@@ -58,4 +58,7 @@ dependencies {
 
     //adding gif to splash page
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.4'
+
+    //Color seek bar
+    compile 'com.github.rtugeek:colorseekbar:1.7.2'
 }

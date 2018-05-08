@@ -30,8 +30,8 @@
             app:layout_constraintBottom_toTopOf="@+id/brush_colorbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:photo_src="@drawable/joyofmotion" />
+            app:layout_constraintTop_toTopOf="parent">
+        </ja.burhanrashid52.photoeditor.PhotoEditorView>
 
         <SeekBar
             android:id="@+id/brush_sizebar"
@@ -42,22 +42,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/colorSlider" />
-
-        <com.rtugeek.android.colorseekbar.ColorSeekBar
-            android:id="@+id/colorSlider"
-            android:layout_width="0dp"
-            android:layout_height="31dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="9dp"
-            app:colorSeeds="@array/material_colors"
-            app:layout_constraintBottom_toTopOf="@+id/brush_sizebar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/brush_colorbar" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <SeekBar
             android:id="@+id/brush_colorbar"
@@ -68,7 +53,6 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="15dp"
-            app:layout_constraintBottom_toTopOf="@+id/colorSlider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_id" />
@@ -91,6 +75,8 @@
                 android:layout_width="0dp"
                 android:layout_height="68dp"
                 android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/ic_paint_brush"
                 android:backgroundTint="@color/teal"
@@ -101,8 +87,9 @@
                 android:textColor="@color/white"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="6dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/erase_button"
@@ -125,62 +112,53 @@
                 android:id="@+id/text_button"
                 android:layout_width="0dp"
                 android:layout_height="68dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="8dp"
                 android:background="@drawable/ic_text"
                 android:fontFamily="monospace"
                 android:gravity="top|center_horizontal"
                 android:text="@string/text"
                 android:textColor="@color/white"
                 android:visibility="visible"
-                android:layout_marginStart="5dp"
-                />
+                tools:layout_editor_absoluteX="119dp"
+                tools:layout_editor_absoluteY="7dp" />
 
             <Button
                 android:id="@+id/undo_button"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:text="Undo"
+                android:layout_marginEnd="120dp"
                 android:background="@color/teal"
+                android:text="Undo"
                 android:textColor="@color/white"
-                android:layout_marginStart="5dp"
-                android:visibility="visible" />
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <Button
+                android:id="@+id/redo_button"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@color/teal"
+                android:text="Redo"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                tools:layout_editor_absoluteX="97dp"
+                tools:layout_editor_absoluteY="9dp" />
+
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@color/teal"
+                android:text="Save"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                tools:layout_editor_absoluteX="147dp"
+                tools:layout_editor_absoluteY="51dp" />
 
         </android.support.constraint.ConstraintLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        <Button
-            android:id="@+id/redo_button"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:text="Redo"
-            android:background="@color/teal"
-            android:textColor="@color/white"
-            android:visibility="visible"
-            android:layout_marginStart="5dp"
-            />
-
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:text="Save"
-            android:background="@color/teal"
-            android:textColor="@color/white"
-            android:layout_marginStart="5dp"
-            android:visibility="visible" />
-
-        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
     </LinearLayout>
-
-
-
-</LinearLayout>

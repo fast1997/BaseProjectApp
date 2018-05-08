@@ -17,4 +17,11 @@
     <string name="input_description">Description</string>
     <string name="btn_picture">Browse</string>
     <string name="btn_upload">Upload</string>
+    <string name="draw">Draw</string>
+    <string name="erase">Erase</string>
+    <string name="text">Text</string>
+    <string name="undo">Undo</string>
+    <string name="redo">Redo</string>
+    <string name="save">Save</string>
+
 </resources>
