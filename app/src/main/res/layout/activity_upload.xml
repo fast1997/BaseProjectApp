@@ -9,95 +9,104 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="398dp"
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+
+        <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="398dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" android:id="@+id/constraint1">
 
             <Button
-                android:id="@+id/cancel_upload_id"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:background="@color/black"
-                android:drawableTop="@drawable/ic_cancel"
-                android:onClick="onCancel" />
+                    android:id="@+id/cancel_upload_id"
+                    android:layout_width="66dp"
+                    android:layout_height="40dp"
+                    android:background="@color/black"
+                    android:drawableTop="@drawable/ic_cancel"
+                    android:onClick="onCancel"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/name"
+                    app:layout_constraintEnd_toStartOf="@+id/post_upload_id" android:layout_marginEnd="8dp"
+                    app:layout_constraintHorizontal_bias="0.037" app:layout_constraintVertical_bias="0.727"/>
 
             <Button
-                android:id="@+id/post_upload_id"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:background="@color/black"
-                android:drawableTop="@drawable/ic_post"
-                android:onClick="onUpload" />
+                    android:id="@+id/post_upload_id"
+                    android:layout_width="66dp"
+                    android:layout_height="40dp"
+                    android:background="@color/black"
+                    android:drawableTop="@drawable/ic_post"
+                    android:onClick="onUpload" app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp" android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/name" app:layout_constraintStart_toStartOf="@+id/name"
+                    android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintVertical_bias="0.0"/>
 
 
             <EditText
-                android:id="@+id/name"
-                android:layout_width="336dp"
-                android:layout_height="40dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="62dp"
-                android:background="@color/white"
-                android:hint="@string/titleEnter"
-                android:inputType="textCapSentences"
-                android:textColor="@color/black" />
+                    android:id="@+id/name"
+                    android:layout_width="336dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="62dp"
+                    android:background="@color/darkergray"
+                    android:hint="@string/titleEnter"
+                    android:foregroundGravity="center_horizontal" android:fontFamily="monospace"
+                    android:textAllCaps="false" android:textStyle="italic"
+                    android:gravity="center_vertical|center_horizontal" android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textColorLink="@color/darkteal" app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent"
+                    android:inputType="" android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/preview_img"/>
 
 
             <ImageView
-                android:id="@+id/preview_img"
-                android:layout_width="326dp"
-                android:layout_height="270dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="16dp"
-                android:background="@color/darkergray"
-                android:contentDescription="@string/preview"
-                android:scaleType="fitCenter" />
+                    android:id="@+id/preview_img"
+                    android:layout_width="326dp"
+                    android:layout_height="270dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/darkergray"
+                    android:contentDescription="@string/preview"
+                    android:scaleType="fitCenter" app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="8dp"
+                    app:layout_constraintVertical_bias="1.0"/>
 
 
-        </RelativeLayout>
+        </android.support.constraint.ConstraintLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="121dp"
-            android:layout_marginBottom="394dp"
-
-            app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
+        <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
+                android:layout_height="121dp"
+                android:layout_marginBottom="394dp"
 
-                <EditText
+                app:layout_constraintBottom_toTopOf="@+id/constraint1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" android:id="@+id/relativeLayout3">
+
+
+            <EditText
                     android:id="@+id/description"
-                    android:layout_width="360dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_width="327dp"
+                    android:layout_height="50dp"
 
-                    android:layout_marginBottom="50dp"
                     android:autoLink="all"
-                    android:background="@color/white"
+                    android:background="@color/darkergray"
 
                     android:hint="@string/descriptionEnter"
                     android:inputType="textMultiLine|textCapSentences"
@@ -105,33 +114,45 @@
                     android:maxLines="3"
                     android:minLines="1"
                     android:scrollbars="none"
-                    android:textColor="@color/black" />
-            </LinearLayout>
+                    android:textColor="@color/white" android:textStyle="italic" android:textAlignment="center"
+                    android:textColorHint="@color/white" android:fontFamily="monospace"
+                    android:fitsSystemWindows="true" android:fadingEdge="horizontal|vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp" app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp" app:layout_constraintHorizontal_bias="0.512"
+                    app:layout_constraintVertical_bias="0.0"/>
 
 
             <Button
-                android:id="@+id/select_upload_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="69dp"
-                android:background="@color/black"
-                android:drawableTop="@drawable/ic_open_gallery"
-                android:onClick="onChoose"
-                android:textColor="@color/white" />
+                    android:id="@+id/select_upload_id"
+                    android:layout_width="66dp"
+                    android:layout_height="40dp"
+                    android:background="@color/black"
+                    android:drawableTop="@drawable/ic_open_gallery"
+                    android:onClick="onChoose"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="48dp" android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/description" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintVertical_bias="0.384"/>
 
             <Button
-                android:id="@+id/edit_image_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="69dp"
-                android:background="@color/blue"
-                android:onClick="onEdit"
-                android:textColor="@color/white" />
-        </RelativeLayout>
+                    android:id="@+id/edit_image_button"
+                    android:layout_width="47dp"
+                    android:layout_height="41dp"
+                    android:background="@drawable/ic_edit_pencil"
+                    android:backgroundTint="@color/silver"
+                    android:onClick="onEdit"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp" app:layout_constraintStart_toEndOf="@+id/select_upload_id"
+                    android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.811"
+                    app:layout_constraintTop_toBottomOf="@+id/description" android:layout_marginTop="8dp"/>
+        </android.support.constraint.ConstraintLayout>
 
 
     </LinearLayout>
