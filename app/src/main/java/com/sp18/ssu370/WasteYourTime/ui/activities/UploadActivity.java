@@ -65,7 +65,8 @@ public class UploadActivity extends AppCompatActivity {
             Bitmap b = BitmapFactory.decodeFile(came_from_edit);
             ImageView v = findViewById(R.id.preview_img);
             v.setImageBitmap(b);
-            chosenFile = new File(came_from_edit);
+            chosenPath = came_from_edit;
+            chosenFile = new File(chosenPath);
         }
 
     }

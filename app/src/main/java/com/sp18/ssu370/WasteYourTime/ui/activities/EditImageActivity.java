@@ -60,7 +60,7 @@ public class EditImageActivity extends AppCompatActivity {
         undoButton = findViewById(R.id.undo_button);
         redoButton = findViewById(R.id.redo_button);
         saveButton = findViewById(R.id.save_button);
-        //exitButton = findViewById(R.id.exit_button);
+        exitButton = findViewById(R.id.exit_button);
 
         brushSizeBar = findViewById(R.id.brush_sizebar);
         brushColorBar = findViewById(R.id.brush_colorbar);
@@ -87,13 +87,13 @@ public class EditImageActivity extends AppCompatActivity {
                 .setDefaultTextTypeface(font)
                 .build();
 
-//        exitButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                view.startAnimation(animAlpha);
-//                leaveActivity();
-//            }
-//        });
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.startAnimation(animAlpha);
+                leaveActivity();
+            }
+        });
 
         drawButton.setOnClickListener(new View.OnClickListener() {
 
@@ -191,18 +191,15 @@ public class EditImageActivity extends AppCompatActivity {
         if (drawCurrentState) {
             photoEditor.setBrushDrawingMode(true);
             drawButton.setAlpha(0.5f);
-            //drawButton.setBackgroundColor(getResources().getColor(R.color.darkteal));
 
             if (eraseCurrentState) {
                 eraseButton.setAlpha(1);
-                //eraseButton.setBackgroundColor(getResources().getColor(R.color.teal));
                 eraseCurrentState = false;
             }
         }
         else {
             photoEditor.setBrushDrawingMode(false);
             drawButton.setAlpha(1);
-            //drawButton.setBackgroundColor(getResources().getColor(R.color.teal));
         }
     }
 
@@ -211,31 +208,26 @@ public class EditImageActivity extends AppCompatActivity {
         if (eraseCurrentState) {
             photoEditor.brushEraser();
             eraseButton.setAlpha(0.5f);
-            //eraseButton.setBackgroundColor(getResources().getColor(R.color.darkteal));
 
             if (drawCurrentState) {
                 drawButton.setAlpha(1);
-                //drawButton.setBackgroundColor(getResources().getColor(R.color.teal));
                 drawCurrentState = false;
             }
         }
         else {
             photoEditor.setBrushDrawingMode(false);
             eraseButton.setAlpha(1);
-            //eraseButton.setBackgroundColor(getResources().getColor(R.color.teal));
         }
     }
 
     public void toggleTextButton() {
         textButton.setAlpha(0.5f);
-        //textButton.setBackgroundColor(getResources().getColor(R.color.darkteal));
 
         TextEditorDialogFragment editorDialogFragment = new TextEditorDialogFragment();
         editorDialogFragment.setOnTextEditorListener(new TextEditorDialogFragment.TextEditor() {
             @Override
             public void onDone(String text) {
                 textButton.setAlpha(1);
-                //textButton.setBackgroundColor(getResources().getColor(R.color.teal));
                 photoEditor.addText(text, getResources().getColor(R.color.darkergray));
             }
         });
@@ -244,12 +236,10 @@ public class EditImageActivity extends AppCompatActivity {
 
         if (eraseCurrentState) {
             eraseButton.setAlpha(1);
-            //eraseButton.setBackgroundColor(getResources().getColor(R.color.teal));
             eraseCurrentState = false;
         }
         if (drawCurrentState) {
             drawButton.setAlpha(1);
-            //drawButton.setBackgroundColor(getResources().getColor(R.color.teal));
             drawCurrentState = false;
         }
     }
