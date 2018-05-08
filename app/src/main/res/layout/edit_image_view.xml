@@ -8,7 +8,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/darkgray"
-    android:layout_gravity="center_horizontal">
+    android:layout_gravity="center_horizontal"
+    android:focusable="true">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -90,19 +91,18 @@
                 android:layout_width="0dp"
                 android:layout_height="68dp"
                 android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/ic_paint_brush"
                 android:backgroundTint="@color/teal"
                 android:fontFamily="monospace"
                 android:gravity="top|center"
                 android:shadowColor="@color/aqua"
-                android:text="Draw"
+                android:text="@string/draw"
                 android:textColor="@color/white"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/undo_button"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="6dp" />
 
             <Button
                 android:id="@+id/erase_button"
@@ -110,17 +110,15 @@
                 android:layout_height="68dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/ic_blue_eraser"
                 android:fontFamily="monospace"
                 android:gravity="top|center"
-                android:text="erase"
+                android:text="@string/erase"
                 android:textColor="@color/white"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/text_button"
-                app:layout_constraintStart_toEndOf="@+id/undo_button"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
@@ -133,29 +131,12 @@
                 android:background="@drawable/ic_text"
                 android:fontFamily="monospace"
                 android:gravity="top|center_horizontal"
-                android:text="Text"
+                android:text="@string/text"
                 android:textColor="@color/white"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/undo_button"
-                android:layout_width="0dp"
-                android:layout_height="68dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/ic_undo"
-                android:fontFamily="monospace"
-                android:gravity="top|center_horizontal"
-                android:text="Undo"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="101dp" />
 
         </android.support.constraint.ConstraintLayout>
 
