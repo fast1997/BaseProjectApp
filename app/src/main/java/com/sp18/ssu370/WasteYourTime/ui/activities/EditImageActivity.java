@@ -40,6 +40,7 @@ public class EditImageActivity extends AppCompatActivity {
     Button undoButton;
     Button redoButton;
     Button saveButton;
+    Button exitButton;
 
     SeekBar brushSizeBar;
     ColorSeekBar brushColorBar;
@@ -59,6 +60,7 @@ public class EditImageActivity extends AppCompatActivity {
         undoButton = findViewById(R.id.undo_button);
         redoButton = findViewById(R.id.redo_button);
         saveButton = findViewById(R.id.save_button);
+        //exitButton = findViewById(R.id.exit_button);
 
         brushSizeBar = findViewById(R.id.brush_sizebar);
         brushColorBar = findViewById(R.id.brush_colorbar);
@@ -84,6 +86,14 @@ public class EditImageActivity extends AppCompatActivity {
                 .setPinchTextScalable(true)
                 .setDefaultTextTypeface(font)
                 .build();
+
+//        exitButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                view.startAnimation(animAlpha);
+//                leaveActivity();
+//            }
+//        });
 
         drawButton.setOnClickListener(new View.OnClickListener() {
 
@@ -180,16 +190,19 @@ public class EditImageActivity extends AppCompatActivity {
         drawCurrentState = !drawCurrentState;
         if (drawCurrentState) {
             photoEditor.setBrushDrawingMode(true);
-            drawButton.setBackgroundColor(getResources().getColor(R.color.darkteal));
+            drawButton.setAlpha(0.5f);
+            //drawButton.setBackgroundColor(getResources().getColor(R.color.darkteal));
 
             if (eraseCurrentState) {
-                eraseButton.setBackgroundColor(getResources().getColor(R.color.teal));
+                eraseButton.setAlpha(1);
+                //eraseButton.setBackgroundColor(getResources().getColor(R.color.teal));
                 eraseCurrentState = false;
             }
         }
         else {
             photoEditor.setBrushDrawingMode(false);
-            drawButton.setBackgroundColor(getResources().getColor(R.color.teal));
+            drawButton.setAlpha(1);
+            //drawButton.setBackgroundColor(getResources().getColor(R.color.teal));
         }
     }
 
@@ -197,27 +210,32 @@ public class EditImageActivity extends AppCompatActivity {
         eraseCurrentState = !eraseCurrentState;
         if (eraseCurrentState) {
             photoEditor.brushEraser();
-            eraseButton.setBackgroundColor(getResources().getColor(R.color.darkteal));
+            eraseButton.setAlpha(0.5f);
+            //eraseButton.setBackgroundColor(getResources().getColor(R.color.darkteal));
 
             if (drawCurrentState) {
-                drawButton.setBackgroundColor(getResources().getColor(R.color.teal));
+                drawButton.setAlpha(1);
+                //drawButton.setBackgroundColor(getResources().getColor(R.color.teal));
                 drawCurrentState = false;
             }
         }
         else {
             photoEditor.setBrushDrawingMode(false);
-            eraseButton.setBackgroundColor(getResources().getColor(R.color.teal));
+            eraseButton.setAlpha(1);
+            //eraseButton.setBackgroundColor(getResources().getColor(R.color.teal));
         }
     }
 
     public void toggleTextButton() {
-        textButton.setBackgroundColor(getResources().getColor(R.color.darkteal));
+        textButton.setAlpha(0.5f);
+        //textButton.setBackgroundColor(getResources().getColor(R.color.darkteal));
 
         TextEditorDialogFragment editorDialogFragment = new TextEditorDialogFragment();
         editorDialogFragment.setOnTextEditorListener(new TextEditorDialogFragment.TextEditor() {
             @Override
             public void onDone(String text) {
-                textButton.setBackgroundColor(getResources().getColor(R.color.teal));
+                textButton.setAlpha(1);
+                //textButton.setBackgroundColor(getResources().getColor(R.color.teal));
                 photoEditor.addText(text, getResources().getColor(R.color.black));
             }
         });
@@ -225,11 +243,13 @@ public class EditImageActivity extends AppCompatActivity {
         editorDialogFragment.show(getSupportFragmentManager(), "Text_Editor");
 
         if (eraseCurrentState) {
-            eraseButton.setBackgroundColor(getResources().getColor(R.color.teal));
+            eraseButton.setAlpha(1);
+            //eraseButton.setBackgroundColor(getResources().getColor(R.color.teal));
             eraseCurrentState = false;
         }
         if (drawCurrentState) {
-            drawButton.setBackgroundColor(getResources().getColor(R.color.teal));
+            drawButton.setAlpha(1);
+            //drawButton.setBackgroundColor(getResources().getColor(R.color.teal));
             drawCurrentState = false;
         }
     }
