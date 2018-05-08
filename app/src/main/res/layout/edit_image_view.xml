@@ -134,12 +134,53 @@
                 android:text="@string/text"
                 android:textColor="@color/white"
                 android:visibility="visible"
+                android:layout_marginStart="5dp"
+                />
+
+            <Button
+                android:id="@+id/undo_button"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="Undo"
+                android:background="@color/teal"
+                android:textColor="@color/white"
+                android:layout_marginStart="5dp"
+                android:visibility="visible" />
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </android.support.constraint.ConstraintLayout>
 
-    </android.support.constraint.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/redo_button"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="Redo"
+            android:background="@color/teal"
+            android:textColor="@color/white"
+            android:visibility="visible"
+            android:layout_marginStart="5dp"
+            />
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:background="@color/teal"
+            android:textColor="@color/white"
+            android:layout_marginStart="5dp"
+            android:visibility="visible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
 
 </LinearLayout>
