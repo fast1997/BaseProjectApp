@@ -180,9 +180,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         break;
 
                     case R.id.upload_nav:
-                        //Intent upload = new Intent(thisContext, UploadActivity.class);
-                        //thisContext.startActivity(upload);
-                        Intent upload = new Intent(thisContext, EditImageActivity.class);
+                        Intent upload = new Intent(thisContext, UploadActivity.class);
                         thisContext.startActivity(upload);
                         break;
                 }

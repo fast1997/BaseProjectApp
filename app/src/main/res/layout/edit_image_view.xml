@@ -21,8 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:background="@color/darkgray"
-            android:scaleType="centerCrop"
-            app:photo_src="@drawable/joyofmotion" />
+            android:scaleType="centerCrop" />
 
         <SeekBar
             android:id="@+id/brush_sizebar"
@@ -73,6 +72,7 @@
                 android:visibility="visible"
                 android:layout_marginStart="5dp"
                 />
+
             <Button
                 android:id="@+id/undo_button"
                 android:layout_width="60dp"
@@ -82,6 +82,33 @@
                 android:textColor="@color/white"
                 android:layout_marginStart="5dp"
                 android:visibility="visible" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/redo_button"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="Redo"
+            android:background="@color/teal"
+            android:textColor="@color/white"
+            android:visibility="visible"
+            android:layout_marginStart="5dp"
+            />
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:background="@color/teal"
+            android:textColor="@color/white"
+            android:layout_marginStart="5dp"
+            android:visibility="visible" />
 
         </LinearLayout>
 

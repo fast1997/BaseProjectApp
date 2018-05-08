@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -50,6 +52,7 @@ public class UploadActivity extends AppCompatActivity {
     //opening gallery
     private File chosenFile;
     private Uri returnUri;
+    private String chosenPath;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,15 +60,33 @@ public class UploadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_upload);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+        String came_from_edit = getIntent().getStringExtra("EXTRA_CAME_FROM_EDIT");
+        if (came_from_edit != null) {
+            Bitmap b = BitmapFactory.decodeFile(came_from_edit);
+            ImageView v = findViewById(R.id.preview_img);
+            v.setImageBitmap(b);
+        }
+
     }
 
 
     public void onChoose(View v) {
-
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+
+    }
+
+    public void onEdit(View v) {
+        if (chosenFile == null) {
+            Toast.makeText(thisContext, "You need to choose an image first", Toast.LENGTH_SHORT)
+                .show();
+            return;
+        }
+        Intent edit_image = new Intent(thisContext, EditImageActivity.class);
+        edit_image.putExtra("EXTRA_CHOSEN_PATH", chosenPath);
+        thisContext.startActivity(edit_image);
 
     }
 
@@ -113,7 +134,7 @@ public class UploadActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ImageResponse> call, Throwable t) {
-                Toast.makeText(thisContext, "An unknown error has occured.", Toast.LENGTH_SHORT)
+                Toast.makeText(thisContext, "An unknown error has occurred.", Toast.LENGTH_SHORT)
                         .show();
                 notificationHelper.createFailedUploadNotification();
                 t.printStackTrace();
@@ -165,12 +186,14 @@ public class UploadActivity extends AppCompatActivity {
 
     private void getFilePath() {
         String filePath = DocumentHelper.getPath(this, this.returnUri);
+        chosenPath = filePath;
         //Safety check to prevent null pointer exception
         if (filePath == null || filePath.isEmpty()) return;
         chosenFile = new File(filePath);
         Log.d("FilePath", filePath);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void addPermission(List<String> permissionsList, String permission) {
         if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
             permissionsList.add(permission);
