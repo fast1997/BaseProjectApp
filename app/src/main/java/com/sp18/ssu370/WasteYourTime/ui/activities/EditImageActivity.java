@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.rtugeek.android.colorseekbar.ColorSeekBar;
 import com.sp18.ssu370.WasteYourTime.ui.util.TextEditorDialogFragment;
 import com.sp18.ssu370.baseprojectapp.R;
 
@@ -41,7 +42,7 @@ public class EditImageActivity extends AppCompatActivity {
     Button saveButton;
 
     SeekBar brushSizeBar;
-    SeekBar brushColorBar;
+    ColorSeekBar brushColorBar;
 
     PhotoEditor photoEditor;
 
@@ -163,21 +164,13 @@ public class EditImageActivity extends AppCompatActivity {
             }
         });
 
-        brushColorBar.setMax(1275);
-        brushColorBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+        brushColorBar.setMaxPosition(100);
+        brushColorBar.setBarHeight(5);
+        brushColorBar.setOnColorChangeListener(new ColorSeekBar.OnColorChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                alterBrushColor(i);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
+            public void onColorChangeListener(int i, int i1, int i2) {
+                alterBrushColor(i, i1, i2);
             }
         });
 
@@ -248,54 +241,12 @@ public class EditImageActivity extends AppCompatActivity {
         }
     }
 
-    public void alterBrushColor(int progress) {
-        int color;
-        int red, green, blue;
-        red = green = blue = 0;
-
-        //0-255 red - yellow
-        if (progress <= 255) {
-            red = 255;
-            green = progress;
-            blue = 0;
-        }
-
-        //256-510 yellow - green
-        else if (progress <= 510) {
-            red = 255 - (progress - 255);
-            green = 255;
-            blue = 0;
-        }
-
-        //511-765 green - blue
-        else if (progress <= 765) {
-            red = 0;
-            green = 255 - (progress - 510);
-            blue = progress - 510;
-        }
-
-        //765-1020 blue - purple
-        else if (progress <= 1020) {
-            red = progress - 765;
-            green = 0;
-            blue = 255;
-        }
-
-        //1021-1275 purple - red
-        else if (progress <= 1275) {
-            red = 255;
-            green = 0;
-            blue = 255 - (progress - 1020);
-        }
-
-        red = red << 16;
-        green= green << 8;
-        color = red | green | blue;
+    public void alterBrushColor(int progress, int alpha_progress, int color) {
 
         if (progress == 0) {
             color = 0x000000;
         }
-        if (progress == 1275) {
+        if (progress == 100) {
             color = 0xffffff;
         }
 
