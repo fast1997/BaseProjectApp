@@ -29,10 +29,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
-                android:background="@color/black"
-                app:itemBackground="@color/black"
-                app:itemIconTint="@drawable/bottom_nav_item_color_state"
-                app:itemTextColor="@drawable/bottom_nav_item_color_state"
+                android:background="@color/silver"
+                app:itemBackground="@color/silver"
+                app:itemIconTint="@color/teal"
+                app:itemTextColor="@color/darkergray"
                 app:menu="@menu/single_item_menu">
 
             </android.support.design.widget.BottomNavigationView>

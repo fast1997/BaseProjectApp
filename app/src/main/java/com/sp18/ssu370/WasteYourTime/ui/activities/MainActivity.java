@@ -32,6 +32,7 @@ import com.sp18.ssu370.WasteYourTime.model.ImgurImage;
 import com.sp18.ssu370.WasteYourTime.model.ImgurImageList;
 import com.sp18.ssu370.WasteYourTime.model.Memes;
 import com.sp18.ssu370.WasteYourTime.network.ImgurImageAsyncTask;
+import com.sp18.ssu370.WasteYourTime.ui.util.BottomNavigationViewHelper;
 import com.sp18.ssu370.WasteYourTime.ui.util.DatabaseHelper;
 import com.sp18.ssu370.WasteYourTime.ui.view.RecyclerViewAdapter;
 import com.sp18.ssu370.baseprojectapp.R;
@@ -114,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void initBottomNavigation(){
+        BottomNavigationView bottomNavigationView =  findViewById(R.id.bottom_navigation);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
