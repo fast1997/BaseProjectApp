@@ -236,7 +236,7 @@ public class EditImageActivity extends AppCompatActivity {
             public void onDone(String text) {
                 textButton.setAlpha(1);
                 //textButton.setBackgroundColor(getResources().getColor(R.color.teal));
-                photoEditor.addText(text, getResources().getColor(R.color.black));
+                photoEditor.addText(text, getResources().getColor(R.color.darkergray));
             }
         });
 
