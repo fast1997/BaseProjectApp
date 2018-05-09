@@ -99,12 +99,19 @@ public class SingleItemActivity extends AppCompatActivity{
     }
 
     public void favorite(String newEntry, boolean isAnimated){
-        boolean insertData = databaseHelper.addData(newEntry, isAnimated);
-        if(insertData){
-            Toast.makeText(thisContext,"Favorited",Toast.LENGTH_SHORT).show();
+
+        if(databaseHelper.isIn(newEntry)) {
+            boolean insertData = databaseHelper.addData(newEntry, isAnimated);
+            if (insertData) {
+                Toast.makeText(thisContext, "Favorited", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(thisContext, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+            }
         }
-        else{
-            Toast.makeText(thisContext,"Something Went Wrong",Toast.LENGTH_SHORT).show();
+        else
+        {
+            databaseHelper.deleteData(newEntry);
+            Toast.makeText(thisContext, "Unfavorited", Toast.LENGTH_SHORT).show();
         }
     }
 
